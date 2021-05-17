@@ -9,22 +9,22 @@ using Petfinder.Models;
 
 namespace Petfinder.Controllers
 {
-    public class UsersController : Controller
+    public class RatingsController : Controller
     {
         private readonly PetfinderContext _context;
 
-        public UsersController(PetfinderContext context)
+        public RatingsController(PetfinderContext context)
         {
             _context = context;
         }
 
-        // GET: Users
+        // GET: Ratings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(await _context.Admins.ToListAsync());
         }
 
-        // GET: Users/Details/5
+        // GET: Ratings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (user == null)
+            var rating = await _context.Admins
+                .FirstOrDefaultAsync(m => m.RatingId == id);
+            if (rating == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(rating);
         }
 
-        // GET: Users/Create
+        // GET: Ratings/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Ratings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,Name,Password,Email,PhoneNumber")] User user)
+        public async Task<IActionResult> Create([Bind("RatingId,Content,Opinion,UserId")] Rating rating)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(rating);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(rating);
         }
 
-        // GET: Users/Edit/5
+        // GET: Ratings/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var rating = await _context.Admins.FindAsync(id);
+            if (rating == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(rating);
         }
 
-        // POST: Users/Edit/5
+        // POST: Ratings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,Name,Password,Email,PhoneNumber")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("RatingId,Content,Opinion,UserId")] Rating rating)
         {
-            if (id != user.UserId)
+            if (id != rating.RatingId)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace Petfinder.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(rating);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.UserId))
+                    if (!RatingExists(rating.RatingId))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace Petfinder.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(rating);
         }
 
-        // GET: Users/Delete/5
+        // GET: Ratings/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (user == null)
+            var rating = await _context.Admins
+                .FirstOrDefaultAsync(m => m.RatingId == id);
+            if (rating == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(rating);
         }
 
-        // POST: Users/Delete/5
+        // POST: Ratings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
+            var rating = await _context.Admins.FindAsync(id);
+            _context.Admins.Remove(rating);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool RatingExists(int id)
         {
-            return _context.Users.Any(e => e.UserId == id);
+            return _context.Admins.Any(e => e.RatingId == id);
         }
     }
 }

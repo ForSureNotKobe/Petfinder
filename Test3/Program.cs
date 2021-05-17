@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using Petfinder.Models;
+using Petfinder.Data;
 
 namespace Petfinder
 {
@@ -15,22 +16,27 @@ namespace Petfinder
         {
             var host = CreateHostBuilder(args).Build();
 
+            CreateDbIfNotExists(host);
+
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        private static void CreateDbIfNotExists(IHost host)
+        {
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
                 try
                 {
-                    SeedData.Initialize(services);
+                    var context = services.GetRequiredService<PetfinderContext>();
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB.");
+                    logger.LogError(ex, "An error occurred creating the DB.");
                 }
-            }     
-            
-            host.Run();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

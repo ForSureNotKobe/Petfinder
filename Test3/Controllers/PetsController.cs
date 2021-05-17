@@ -47,7 +47,7 @@ namespace Petfinder.Controllers
         // GET: Pets/Create
         public IActionResult Create()
         {
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId");
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PetId,UserId,Name,Age,Sex,Origins,Type,Description,Size,Difficulty,ShelterId,PhotoUrl")] Pet pet)
+        public async Task<IActionResult> Create([Bind("PetId,Name,Age,Sex,Origins,Type,Description,Size,Difficulty,PhotoUrl,ShelterId")] Pet pet)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace Petfinder.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId", pet.ShelterId);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", pet.ShelterId);
             return View(pet);
         }
 
@@ -81,7 +81,7 @@ namespace Petfinder.Controllers
             {
                 return NotFound();
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId", pet.ShelterId);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", pet.ShelterId);
             return View(pet);
         }
 
@@ -90,7 +90,7 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PetId,UserId,Name,Age,Sex,Origins,Type,Description,Size,Difficulty,ShelterId,PhotoUrl")] Pet pet)
+        public async Task<IActionResult> Edit(int id, [Bind("PetId,Name,Age,Sex,Origins,Type,Description,Size,Difficulty,PhotoUrl,ShelterId")] Pet pet)
         {
             if (id != pet.PetId)
             {
@@ -117,7 +117,7 @@ namespace Petfinder.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId", pet.ShelterId);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", pet.ShelterId);
             return View(pet);
         }
 

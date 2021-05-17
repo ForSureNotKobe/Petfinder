@@ -5,20 +5,35 @@ using System.Threading.Tasks;
 
 namespace Petfinder.Models
 {
+    public enum Size
+    {
+        small, average, big
+    }
+
+    public enum Difficulty
+    {
+        easy, moderate, hard
+    }
+
+    public enum Sex
+    {
+        male, female
+    }
     public class Pet
     {
         public int PetId { get; set; }
-        public int UserId { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
-        public int Sex { get; set; }
+        public Sex? Sex { get; set; }
         public int Origins { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
-        public int Size { get; set; }
-        public int Difficulty { get; set; }
-        public int ShelterId { get; set; }
+        public Size? Size { get; set; }
+        public Difficulty? Difficulty { get; set; }
         public string PhotoUrl { get; set; }
-        public virtual Shelter Shelter { get; set; }
+
+        public int ShelterId { get; set; }
+        public Shelter Shelter { get; set; }
     }
 }
+

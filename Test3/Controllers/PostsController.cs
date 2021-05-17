@@ -21,8 +21,7 @@ namespace Petfinder.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-            var petfinderContext = _context.Posts.Include(p => p.User);
-            return View(await petfinderContext.ToListAsync());
+            return View(await _context.Posts.ToListAsync());
         }
 
         // GET: Posts/Details/5
@@ -34,7 +33,6 @@ namespace Petfinder.Controllers
             }
 
             var post = await _context.Posts
-                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.PostId == id);
             if (post == null)
             {
@@ -47,7 +45,6 @@ namespace Petfinder.Controllers
         // GET: Posts/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
             return View();
         }
 
@@ -56,7 +53,7 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PostId,UserId,Type,Title,Description,PhotoUrl")] Post post)
+        public async Task<IActionResult> Create([Bind("PostId,Type,Title,Description,PhotoUrl,UserId")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +61,6 @@ namespace Petfinder.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", post.UserId);
             return View(post);
         }
 
@@ -81,7 +77,6 @@ namespace Petfinder.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", post.UserId);
             return View(post);
         }
 
@@ -90,7 +85,7 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PostId,UserId,Type,Title,Description,PhotoUrl")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("PostId,Type,Title,Description,PhotoUrl,UserId")] Post post)
         {
             if (id != post.PostId)
             {
@@ -117,7 +112,6 @@ namespace Petfinder.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", post.UserId);
             return View(post);
         }
 
@@ -130,7 +124,6 @@ namespace Petfinder.Controllers
             }
 
             var post = await _context.Posts
-                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.PostId == id);
             if (post == null)
             {

@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<Petfinder.Models.Post>
 
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -31,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.PhotoUrl)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayNameFor(model => model.UserId)
             </th>
             <th></th>
         </tr>
@@ -52,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.PhotoUrl)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.UserId)
+                @Html.DisplayFor(modelItem => item.UserId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PostId">Edit</a> |

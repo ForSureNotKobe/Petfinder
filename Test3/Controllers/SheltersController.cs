@@ -33,7 +33,7 @@ namespace Petfinder.Controllers
             }
 
             var shelter = await _context.Shelters
-                .FirstOrDefaultAsync(m => m.ShelterId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (shelter == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShelterId,Name,Password,Email,PhoneNumber,Localization")] Shelter shelter)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,PhoneNumber,Address,Nip")] Shelter shelter)
         {
             if (ModelState.IsValid)
             {
@@ -85,9 +85,9 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ShelterId,Name,Password,Email,PhoneNumber,Localization")] Shelter shelter)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,PhoneNumber,Address,Nip")] Shelter shelter)
         {
-            if (id != shelter.ShelterId)
+            if (id != shelter.Id)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Petfinder.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ShelterExists(shelter.ShelterId))
+                    if (!ShelterExists(shelter.Id))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace Petfinder.Controllers
             }
 
             var shelter = await _context.Shelters
-                .FirstOrDefaultAsync(m => m.ShelterId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (shelter == null)
             {
                 return NotFound();
@@ -146,7 +146,7 @@ namespace Petfinder.Controllers
 
         private bool ShelterExists(int id)
         {
-            return _context.Shelters.Any(e => e.ShelterId == id);
+            return _context.Shelters.Any(e => e.Id == id);
         }
     }
 }

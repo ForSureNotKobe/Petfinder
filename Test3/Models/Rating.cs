@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace Petfinder.Models
 {
-    public class Ratings
+    public enum Opinion
     {
-        [Key]
+        bad, neutral, good
+    }
+    public class Rating
+    {
         public int RatingId { get; set; }
+        public string Content { get; set; }
+        public Opinion? Opinion { get; set; }
+
         public int UserId { get; set; }
-        public string Rating { get; set; }
-        public virtual Vet Vet { get; set; }
-        public virtual User User { get; set; }
+        public User User { get; set; }
     }
 }
+

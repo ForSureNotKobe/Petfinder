@@ -1,9 +1,5 @@
 ﻿@model Petfinder.Models.Post
 
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -43,11 +39,11 @@
             @Html.DisplayFor(model => model.PhotoUrl)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.UserId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.UserId)
-        </dd class>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
     </dl>
     
     <form asp-action="Delete">
