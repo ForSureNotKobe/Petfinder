@@ -1,4 +1,5 @@
-﻿using Petfinder.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Petfinder.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,47 +13,72 @@ namespace Petfinder.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any users.
             if (context.Users.Any())
             {
                 return;   // DB has been seeded
             }
 
-            //var users = new User[]
-            //{
-            //new User{UserName = "Test 1",Email= "test@test.com"}
-            //};
-            //foreach (User u in users)
-            //{
-            //    context.Users.Add(u);
-            //}
-            //context.SaveChanges();
+            var users = new User[]
+            {
+                    new User { UserName = "Jan Kowalski", Email = "J.Kowalski@gamil.com", PhoneNumber = "123456789" },
+                    new User { UserName = "Adam Wojcik", Email = "A.Wojcik@gamil.com", PhoneNumber = "123456789" },
+                    new User { UserName = "Grzegorz Malinowski", Email = "G.Malinowski@gamil.com", PhoneNumber = "123456789" },
+                    new User { UserName = "Anna Sklodowska", Email = "A.Sklodowska@gamil.com", PhoneNumber = "123456789" },
+                    new User { UserName = "Adrian Cur", Email = "A.Cur@gamil.com", PhoneNumber = "123456789" },
+                    new User { UserName = "Natalia Biernacka", Email = "N.Biernacka@gamil.com", PhoneNumber = "123456789" },
+                    new User { UserName = "Jakub Wierzbicki", Email = "J.Wierzbicki@gamil.com", PhoneNumber = "123456789" },
+                    new User { UserName = "Kamila Smiech", Email = "K.Smiech@gamil.com", PhoneNumber = "123456789" },
+                    new User { UserName = "Karol Godlewski", Email = "K.Godlewski@gamil.com", PhoneNumber = "123456789" },
+                    new User { UserName = "Marcelina Zak", Email = "M.Zak@gamil.com", PhoneNumber = "123456789" }
+            };
 
-            //var shelters = new Shelter[]
-            //{
-            //new Shelter{Name = "Shelter 1", User = users.First()}
-            //};
-            //foreach (Shelter s in shelters)
-            //{
-            //    context.Shelters.Add(s);
-            //}
-            //context.SaveChanges();
+            PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+            foreach (User u in users)
+            {
+                passwordHasher.HashPassword(u, "Admin123@");
+                context.Users.Add(u);
+            }
+            context.SaveChanges();
 
-            //var pets = new Pet[]
-            //{
-            //new Pet{Name = "Pimpek", Shelter = shelters.First()},
-            //new Pet{Name = "Dupek", Shelter = shelters.First()}
-            //};
-            //foreach (Pet p in pets)
-            //{
-            //    context.Pets.Add(p);
-            //}
-            //context.SaveChanges();
 
-            //foreach (Pet p in pets)
-            //{
-            //    shelters.FirstOrDefault().Pets.Add(p);
-            //}
+            var shelters = new Shelter[]
+            {
+                    new Shelter { Name = "PetHouse", Email = "Pet.House@gamil.com", Nip = 123, PhoneNumber = "123456789", Address = "Wroclaw, Olbin" },
+                    new Shelter { Name = "WroPets", Email = "Wro.Pets@gamil.com", Nip = 456, PhoneNumber = "123456789", Address = "Wroclaw, plac grunwaldzki" }
+            };
+
+            foreach (Shelter s in shelters)
+            {
+                context.Shelters.Add(s);
+            }
+            context.SaveChanges();
+
+            var pets = new Pet[]
+            {
+                    new Pet { ShelterId = 1, Name = "Azor", Age = 2, Sex = (Sex?)1, Origins = 0, Type = "Dog", Description = "Owczarek niemiecki, dlugo-wlosy, opalany", Size = (Size?)2, Difficulty = (Difficulty?)2 },
+                    new Pet { ShelterId = 2, Name = "Czesio", Age = 1, Sex = (Sex?)1, Origins = 0, Type = "Hamster", Description = "Chomik, jasna siersc, mlody", Size = (Size?)0, Difficulty = 0 },
+                    new Pet { ShelterId = 2, Name = "Oskar", Age = 5, Sex = (Sex?)1, Origins = 0, Type = "Dog", Description = "York, bialy", Size = (Size?)0, Difficulty = (Difficulty?)1 },
+                    new Pet { ShelterId = 2, Name = "Ella", Age = 3, Sex = (Sex?)0, Origins = 0, Type = "Cat", Description = "Kot, Rudy", Size = (Size?)1, Difficulty = 0 },
+                    new Pet { ShelterId = 2, Name = "Bobek", Age = 4, Sex = (Sex?)1, Origins = 0, Type = "Tortoise", Description = "Maly zolwik", Size = (Size?)0, Difficulty = 0 },
+                    new Pet { ShelterId = 2, Name = "Aria", Age = 1, Sex = (Sex?)0, Origins = 0, Type = "Cat", Description = "Kot perski, zloty", Size = (Size?)0, Difficulty = (Difficulty?)2 },
+                    new Pet { ShelterId = 2, Name = "Kiel", Age = 8, Sex = (Sex?)1, Origins = 0, Type = "Dog", Description = "Golden red river, ciemny wlos", Size = (Size?)2, Difficulty = (Difficulty?)1 },
+                    new Pet { ShelterId = 2, Name = "Cymek", Age = 6, Sex = (Sex?)1, Origins = 0, Type = "Cat", Description = "Kot, czarna karnacja", Size = 0, Difficulty = (Difficulty?)1 },
+                    new Pet { ShelterId = 1, Name = "Mati", Age = 3, Sex = (Sex?)2, Origins = 0, Type = "Dog", Description = "Jamnik, ciemna siersc", Size = 0, Difficulty = (Difficulty?)1 },
+                    new Pet { ShelterId = 1, Name = "Alex", Age = 1, Sex = (Sex?)0, Origins = 0, Type = "Hamster", Description = "Chomik, brazowy", Size = 0, Difficulty = 0 },
+                    new Pet { ShelterId = 1, Name = "Oli", Age = 0, Sex = (Sex?)0, Origins = 0, Type = "Mouse", Description = "Mysz domowa, szara", Size = 0, Difficulty = 0 },
+                    new Pet { ShelterId = 1, Name = "Benia", Age = 1, Sex = (Sex?)0, Origins = 0, Type = "Squirel", Description = "Wiewiorka czarna", Size = 0, Difficulty = (Difficulty?)2 },
+                    new Pet { ShelterId = 1, Name = "Adek", Age = 4, Sex = (Sex?)1, Origins = 0, Type = "Dog", Description = "Owczarek niemiecki, brazowy", Size = (Size?)2, Difficulty = (Difficulty?)2 },
+                    new Pet { ShelterId = 1, Name = "Zosia", Age = 2, Sex = (Sex?)0, Origins = 0, Type = "Cat", Description = "Minecoon, jasny wlos", Size = (Size?)1, Difficulty = (Difficulty?)2 },
+                    new Pet { ShelterId = 1, Name = "Edek", Age = 3, Sex = (Sex?)1, Origins = 0, Type = "Cat", Description = "Kot Syberyjski, jasny", Size = 0, Difficulty = (Difficulty?)1 },
+                    new Pet { ShelterId = 1, Name = "Enio", Age = 1, Sex = (Sex?)1, Origins = 0, Type = "Hamster", Description = "Chomik, szary", Size = 0, Difficulty = 0 }
+            };
+
+            foreach (Pet p in pets)
+            {
+                context.Pets.Add(p);
+            }
+
+            context.SaveChanges();
         }
     }
 }

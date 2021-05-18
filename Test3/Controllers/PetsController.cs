@@ -21,8 +21,7 @@ namespace Petfinder.Controllers
         // GET: Pets
         public async Task<IActionResult> Index()
         {
-            var petfinderContext = _context.Pets.Include(p => p.Shelter);
-            return View(await petfinderContext.ToListAsync());
+            return View(await _context.Pets.ToListAsync());
         }
 
         // GET: Pets/Details/5
