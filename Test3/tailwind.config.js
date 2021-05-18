@@ -2,7 +2,7 @@ module.exports = {
     purge: {
         enabled: false,
         content: [
-            './Views/**/*.chstml'
+            './Views/**/*.cshtml'
         ]
     },
   darkMode: false, // or 'media' or 'class'
