@@ -3,4 +3,26 @@
 @tailwind components;
 @tailwind utilities;
 
+.tile-background-animated {
+    @apply cursor-pointer bg-white shadow-xl lg:max-w-md rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105;
+}
+
+.tile-background {
+    @apply cursor-pointer bg-white shadow-xl lg:max-w-md rounded-lg;
+}
+
+.tile-image {
+    @apply bg-cover h-56 rounded-t-lg;
+}
+
+.tile-pet-name {
+    @apply p-2 pt-4 text-center font-semibold text-lg text-gray-700 overflow-ellipsis;
+}
+
+.tile-pet-text {
+    @apply overflow-ellipsis truncate px-4 pb-2 text-center;
+}
+
+
+
 
