@@ -1,8 +1,5 @@
 ﻿@model Petfinder.Models.Shelter
 
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -20,32 +17,32 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+            <div class="relative w-full mb-3">
+                <label asp-for="Name" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
+                <input asp-for="Name" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+            <div class="relative w-full mb-3">
+                <label asp-for="Email" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
+                <input asp-for="Email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
+            <div class="relative w-full mb-3">
+                <label asp-for="PhoneNumber" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
+                <input asp-for="PhoneNumber" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+            <div class="relative w-full mb-3">
+                <label asp-for="Address" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
+                <input asp-for="Address" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Nip" class="control-label"></label>
-                <input asp-for="Nip" class="form-control" />
+            <div class="relative w-full mb-3">
+                <label asp-for="Nip" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
+                <input asp-for="Nip" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
                 <span asp-validation-for="Nip" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="relative w-full mb-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

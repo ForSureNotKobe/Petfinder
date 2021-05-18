@@ -10,29 +10,28 @@
 </head>
 <body>
 
-<h4>Rating</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="RatingId" />
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
+            <div class="relative w-full mb-3">
+                <label asp-for="Content" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
+                <input asp-for="Content" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Opinion" class="control-label"></label>
-                <input asp-for="Opinion" class="form-control" />
+            <div class="relative w-full mb-3">
+                <label asp-for="Opinion" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
+                <input asp-for="Opinion" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
                 <span asp-validation-for="Opinion" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
+            <div class="relative w-full mb-3">
+                <label asp-for="UserId" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
+                <input asp-for="UserId" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="relative w-full mb-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
