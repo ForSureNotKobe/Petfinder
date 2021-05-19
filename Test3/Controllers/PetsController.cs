@@ -19,9 +19,18 @@ namespace Petfinder.Controllers
         }
 
         // GET: Pets
-        public async Task<IActionResult> Index()
+       
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Pets.ToListAsync());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(await _context.Pets
+                   .Where(p => p.Name.Contains(searchString) ||
+                   p.Type.Contains(searchString))
+                   .ToListAsync());
+            }
+            else
+                return View(await _context.Pets.ToListAsync());
         }
 
         // GET: Pets/Details/5
