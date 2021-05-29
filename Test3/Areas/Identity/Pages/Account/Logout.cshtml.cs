@@ -23,11 +23,11 @@ namespace Petfinder.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        public void OnGet()
-        {
-        }
+        //public void OnGet()
+        //{
+        //}
 
-        public async Task<IActionResult> OnPost(string returnUrl = null)
+        public async Task<IActionResult> OnGet(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
@@ -37,7 +37,7 @@ namespace Petfinder.Areas.Identity.Pages.Account
             }
             else
             {
-                return RedirectToPage();
+                return RedirectToPage("/");
             }
         }
     }

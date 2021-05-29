@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Petfinder.Models;
 
 namespace Petfinder.Models
 {
@@ -30,6 +31,13 @@ namespace Petfinder.Models
             modelBuilder.Entity<Rating>()
                 .HasOne(r => r.User)
                 .WithMany(u => u.Ratings);
+
+            modelBuilder.Entity<User>()
+                .HasOne(c => c.Clinic);
+
+            modelBuilder.Entity<Clinic>()
+                .HasMany(r => r.Ratings);
         }
+        public DbSet<Petfinder.Models.Clinic> Clinic { get; set; }
     }
 }
