@@ -19,7 +19,7 @@ namespace Petfinder.Controllers
             _logger = logger;
             _context = context;
         }
-
+        
         public IActionResult Index()
         {
             ViewBag.Pets = _context.Pets;
