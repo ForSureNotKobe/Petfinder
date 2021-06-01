@@ -148,5 +148,7 @@ namespace Petfinder.Controllers
         {
             return _context.Clinic.Any(e => e.Id == id);
         }
+
+        
     }
 }
