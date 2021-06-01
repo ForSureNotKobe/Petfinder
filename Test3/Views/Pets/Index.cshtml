@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Petfinder.Models.Pet>
 
-
 <!DOCTYPE html>
 
 <html>
@@ -9,10 +8,68 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        <button asp-action="Create">Create New</button>
-        @Html.DropDownList("SortParams",null, new {onchange="document.location.href='/Pets?selectedValue='+this.value;"})
-    </p>
+
+    @Html.DropDownList("SortParams",null, new {onchange="document.location.href='/Pets?selectedValue='+this.value;"})
+    
+    @using (Html.BeginForm("Index", "Pets", FormMethod.Post))
+    {
+        <div class="grid grid-cols-7 gap-6">
+            <div class="flex items-center col-span-6 sm:col-span-1">
+                <a class="text-center flex bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" asp-action="Create">Create New</a>
+            </div>
+            <div class="col-span-6 sm:col-span-1">
+                <label for="Sex" class="block text-sm font-medium text-gray-700">Sex</label>
+                <select Name="Sex" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value=9>Any</option>
+                    <option value=0>Male</option>
+                    <option value=1>Female</option>
+                </select>
+            </div>
+            <div class="col-span-6 sm:col-span-1">
+                <label for="Origins" class="block text-sm font-medium text-gray-700">Origins</label>
+                <select name="Origins" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value=9>Any</option>
+                    <option value=0>Born in Shelter</option>
+                    <option value=1>Found</option>
+                    <option value=2>Given away</option>
+                </select>
+            </div>
+            <div class="col-span-6 sm:col-span-1">
+                <label for="BreedType" class="block text-sm font-medium text-gray-700">Type</label>
+                <select name="BreedType" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value=9>Any</option>
+                    <option value=0>Dog</option>
+                    <option value=1>Cat</option>
+                    <option value=2>Other</option>
+                </select>
+            </div>
+            <div class="col-span-6 sm:col-span-1">
+                <label for="Size" class="block text-sm font-medium text-gray-700">Size</label>
+                <select name="Size" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value=9>Any</option>
+                    <option value=0>Small</option>
+                    <option value=1>Average</option>
+                    <option value=2>Big</option>
+                </select>
+            </div>
+            <div class="col-span-6 sm:col-span-1">
+                <label for="Difficulty" class="block text-sm font-medium text-gray-700">Difficulty</label>
+                <select name="Difficulty" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value=9>Any</option>
+                    <option value=0>Easy</option>
+                    <option value=1>Moderate</option>
+                    <option value=2>Hard</option>
+                </select>
+            </div>
+
+            @*<div class="col-span-6 sm:col-span-1">
+                        <label asp-for="ShelterId" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">ShelterId</label>
+                        <select asp-for="ShelterId" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="ShelterId" asp-items="ViewBag.ShelterId"></select>
+                </div>*@
+            <input type="submit" value="Apply Filters" />
+
+        </div>
+    }
     <div class="bg-gray-200">
         <div class="max-w-md sm:max-w-xl lg:max-w-6xl mx-auto px-8 lg:px-12 py-8">
             <p class="m-auto text-gray-600 text-2xl text-center">New pets available for adoption</p>
@@ -30,7 +87,5 @@
             </div>
         </div>
     </div>
-
-
 </body>
 </html>
