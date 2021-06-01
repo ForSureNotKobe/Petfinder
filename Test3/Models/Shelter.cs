@@ -7,7 +7,7 @@ namespace Petfinder.Models
 {
     public class Shelter
     {
-        public int Id { get; set; }
+        public int ShelterId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
@@ -16,5 +16,7 @@ namespace Petfinder.Models
 
         public List<Pet> Pets { get; set; }
         public List<User> Users { get; set; }
+
+        public IEnumerable<Shelter> Shelters { get; set; }
     }
 }

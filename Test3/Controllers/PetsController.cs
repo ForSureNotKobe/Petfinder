@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Dynamic;
 using Petfinder.Models;
 
 namespace Petfinder.Controllers
@@ -17,20 +18,31 @@ namespace Petfinder.Controllers
 
         public PetsController(PetfinderContext context)
         {
-            _context = context;
+            _context = context;            
         }
 
         // GET: Pets
-        public async Task<IActionResult> Index(string searchString)
+        public IActionResult Index(string searchString)
         {
+            //dynamic myModel = new ExpandoObject();
+            //myModel.Pets = _context.Pets;
+            //myModel.Shelters = _context.Shelters;
+
+            ViewData["Name"] = new SelectList(_context.Shelters, "Name", "Name");
+
+
+            PetViewModel petViewModel = new PetViewModel
+            {
+                Pets = _context.Pets,
+                Shelters = _context.Shelters
+            };
+
             if (!String.IsNullOrEmpty(searchString))
             {
-                return View(await _context.Pets
-                   .Where(p => p.Name.Contains(searchString))
-                   .ToListAsync());
+                return View(petViewModel);
             }
             else
-                return View(await _context.Pets.ToListAsync());
+                return View(petViewModel);
         }
 
         // GET: Pets/Details/5
@@ -172,11 +184,14 @@ namespace Petfinder.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(IFormCollection formCollection)
         {
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id");
+
             Petfinder.Models.Sex sexFilter = (Petfinder.Models.Sex)Convert.ToInt32(formCollection["Sex"]);
             Petfinder.Models.Origins originsFilter = (Petfinder.Models.Origins)Convert.ToInt32(formCollection["Origins"]);
             Petfinder.Models.BreedType breedTypeFilter = (Petfinder.Models.BreedType)Convert.ToInt32(formCollection["BreedType"]);
             Petfinder.Models.Size sizeFilter = (Petfinder.Models.Size)Convert.ToInt32(formCollection["Size"]);
             Petfinder.Models.Difficulty difficultyFilter = (Petfinder.Models.Difficulty)Convert.ToInt32(formCollection["Difficulty"]);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", formCollection["ShelterId"]);
             return View(await _context.Pets
                 .Where(p => 
                 (p.Sex.Equals(sexFilter) || Convert.ToInt32(formCollection["Sex"]).Equals(9)) &&

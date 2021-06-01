@@ -33,7 +33,7 @@ namespace Petfinder.Controllers
             }
 
             var shelter = await _context.Shelters
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ShelterId == id);
             if (shelter == null)
             {
                 return NotFound();
@@ -87,7 +87,7 @@ namespace Petfinder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,PhoneNumber,Address,Nip")] Shelter shelter)
         {
-            if (id != shelter.Id)
+            if (id != shelter.ShelterId)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace Petfinder.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ShelterExists(shelter.Id))
+                    if (!ShelterExists(shelter.ShelterId))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace Petfinder.Controllers
             }
 
             var shelter = await _context.Shelters
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ShelterId == id);
             if (shelter == null)
             {
                 return NotFound();
@@ -146,7 +146,7 @@ namespace Petfinder.Controllers
 
         private bool ShelterExists(int id)
         {
-            return _context.Shelters.Any(e => e.Id == id);
+            return _context.Shelters.Any(e => e.ShelterId == id);
         }
     }
 }

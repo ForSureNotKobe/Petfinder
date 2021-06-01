@@ -191,13 +191,18 @@ namespace Petfinder.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<int>("BreedType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Difficulty")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Origins")
@@ -206,7 +211,7 @@ namespace Petfinder.Migrations
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Sex")
+                    b.Property<int>("Sex")
                         .HasColumnType("int");
 
                     b.Property<int>("ShelterId")
@@ -214,9 +219,6 @@ namespace Petfinder.Migrations
 
                     b.Property<int?>("Size")
                         .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PetId");
 
@@ -241,7 +243,7 @@ namespace Petfinder.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Type")
+                    b.Property<int?>("Type")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -285,12 +287,12 @@ namespace Petfinder.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("Admins");
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("Petfinder.Models.Shelter", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ShelterId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -310,7 +312,12 @@ namespace Petfinder.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("ShelterId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("ShelterId");
+
+                    b.HasIndex("ShelterId1");
 
                     b.ToTable("Shelters");
                 });
@@ -479,6 +486,13 @@ namespace Petfinder.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Petfinder.Models.Shelter", b =>
+                {
+                    b.HasOne("Petfinder.Models.Shelter", null)
+                        .WithMany("Shelters")
+                        .HasForeignKey("ShelterId1");
+                });
+
             modelBuilder.Entity("Petfinder.Models.User", b =>
                 {
                     b.HasOne("Petfinder.Models.Clinic", "Clinic")
@@ -504,6 +518,8 @@ namespace Petfinder.Migrations
             modelBuilder.Entity("Petfinder.Models.Shelter", b =>
                 {
                     b.Navigation("Pets");
+
+                    b.Navigation("Shelters");
 
                     b.Navigation("Users");
                 });
