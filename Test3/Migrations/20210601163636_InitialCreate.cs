@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Petfinder.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,17 +42,24 @@ namespace Petfinder.Migrations
                 name: "Shelters",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ShelterId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Nip = table.Column<int>(type: "int", nullable: false)
+                    Nip = table.Column<int>(type: "int", nullable: false),
+                    ShelterId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Shelters", x => x.Id);
+                    table.PrimaryKey("PK_Shelters", x => x.ShelterId);
+                    table.ForeignKey(
+                        name: "FK_Shelters_Shelters_ShelterId1",
+                        column: x => x.ShelterId1,
+                        principalTable: "Shelters",
+                        principalColumn: "ShelterId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,7 +119,7 @@ namespace Petfinder.Migrations
                         name: "FK_AspNetUsers_Shelters_ShelterId",
                         column: x => x.ShelterId,
                         principalTable: "Shelters",
-                        principalColumn: "Id",
+                        principalColumn: "ShelterId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -122,12 +129,12 @@ namespace Petfinder.Migrations
                 {
                     PetId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
-                    Sex = table.Column<int>(type: "int", nullable: true),
+                    Sex = table.Column<int>(type: "int", nullable: false),
                     Origins = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BreedType = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Size = table.Column<int>(type: "int", nullable: true),
                     Difficulty = table.Column<int>(type: "int", nullable: true),
                     PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -140,37 +147,8 @@ namespace Petfinder.Migrations
                         name: "FK_Pets_Shelters_ShelterId",
                         column: x => x.ShelterId,
                         principalTable: "Shelters",
-                        principalColumn: "Id",
+                        principalColumn: "ShelterId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Admins",
-                columns: table => new
-                {
-                    RatingId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Opinion = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ClinicId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admins", x => x.RatingId);
-                    table.ForeignKey(
-                        name: "FK_Admins_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Admins_Clinic_ClinicId",
-                        column: x => x.ClinicId,
-                        principalTable: "Clinic",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,7 +242,7 @@ namespace Petfinder.Migrations
                 {
                     PostId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -282,15 +260,34 @@ namespace Petfinder.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Admins_ClinicId",
-                table: "Admins",
-                column: "ClinicId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Admins_UserId1",
-                table: "Admins",
-                column: "UserId1");
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    RatingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Opinion = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ClinicId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.RatingId);
+                    table.ForeignKey(
+                        name: "FK_Ratings_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Clinic_ClinicId",
+                        column: x => x.ClinicId,
+                        principalTable: "Clinic",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -352,13 +349,25 @@ namespace Petfinder.Migrations
                 name: "IX_Posts_UserId1",
                 table: "Posts",
                 column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_ClinicId",
+                table: "Ratings",
+                column: "ClinicId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_UserId1",
+                table: "Ratings",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shelters_ShelterId1",
+                table: "Shelters",
+                column: "ShelterId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Admins");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -379,6 +388,9 @@ namespace Petfinder.Migrations
 
             migrationBuilder.DropTable(
                 name: "Posts");
+
+            migrationBuilder.DropTable(
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

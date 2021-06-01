@@ -21,7 +21,7 @@ namespace Petfinder.Controllers
         // GET: Ratings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Admins.ToListAsync());
+            return View(await _context.Ratings.ToListAsync());
         }
 
         // GET: Ratings/Details/5
@@ -32,7 +32,7 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
-            var rating = await _context.Admins
+            var rating = await _context.Ratings
                 .FirstOrDefaultAsync(m => m.RatingId == id);
             if (rating == null)
             {
@@ -72,7 +72,7 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
-            var rating = await _context.Admins.FindAsync(id);
+            var rating = await _context.Ratings.FindAsync(id);
             if (rating == null)
             {
                 return NotFound();
@@ -123,7 +123,7 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
-            var rating = await _context.Admins
+            var rating = await _context.Ratings
                 .FirstOrDefaultAsync(m => m.RatingId == id);
             if (rating == null)
             {
@@ -138,15 +138,15 @@ namespace Petfinder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var rating = await _context.Admins.FindAsync(id);
-            _context.Admins.Remove(rating);
+            var rating = await _context.Ratings.FindAsync(id);
+            _context.Ratings.Remove(rating);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RatingExists(int id)
         {
-            return _context.Admins.Any(e => e.RatingId == id);
+            return _context.Ratings.Any(e => e.RatingId == id);
         }
     }
 }

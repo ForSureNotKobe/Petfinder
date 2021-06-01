@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Petfinder.Models.Pet>
+﻿@model Petfinder.Models.PetViewModel
 
 <!DOCTYPE html>
 
@@ -62,10 +62,10 @@
                 </select>
             </div>
 
-            @*<div class="col-span-6 sm:col-span-1">
-                        <label asp-for="ShelterId" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">ShelterId</label>
-                        <select asp-for="ShelterId" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="ShelterId" asp-items="ViewBag.ShelterId"></select>
-                </div>*@
+            <div class="col-span-6 sm:col-span-1">
+                <label asp-for="@Model.Shelters" class="block text-sm font-medium text-gray-700">ShelterId</label>
+                <select asp-for="@Model.Shelters" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" asp-items="ViewBag.Name"></select>
+            </div>
             <input type="submit" value="Apply Filters" />
 
         </div>
@@ -75,11 +75,20 @@
             <p class="m-auto text-gray-600 text-2xl text-center">New pets available for adoption</p>
             <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-                @foreach (var pet in Model)
+                @foreach (var pet in Model.Pets)
                 {
                     <div onclick="location.href='/Pets/Details/@pet.PetId';" class="tile-background-animated">
                         <div class="tile-image" style="background-image: url(https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)"></div>
                         <h2 class="tile-pet-name">@pet.Name</h2>
+                        <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
+                    </div>
+                }
+                
+                @foreach (var shelter in Model.Shelters)
+                {
+                    <div onclick="location.href='/Shelters/Details/@shelter.ShelterId';" class="tile-background-animated">
+                        <div class="tile-image" style="background-image: url(https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)"></div>
+                        <h2 class="tile-pet-name">@shelter.Name</h2>
                         <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
                     </div>
                 }
