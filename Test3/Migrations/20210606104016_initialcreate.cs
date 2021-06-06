@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Petfinder.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,10 +22,10 @@ namespace Petfinder.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clinic",
+                name: "Clinics",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ClinicId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -35,7 +35,7 @@ namespace Petfinder.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clinic", x => x.Id);
+                    table.PrimaryKey("PK_Clinics", x => x.ClinicId);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,10 +110,10 @@ namespace Petfinder.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Clinic_ClinicId",
+                        name: "FK_AspNetUsers_Clinics_ClinicId",
                         column: x => x.ClinicId,
-                        principalTable: "Clinic",
-                        principalColumn: "Id",
+                        principalTable: "Clinics",
+                        principalColumn: "ClinicId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUsers_Shelters_ShelterId",
@@ -270,7 +270,7 @@ namespace Petfinder.Migrations
                     Opinion = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ClinicId = table.Column<int>(type: "int", nullable: true)
+                    ClinicId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -282,11 +282,11 @@ namespace Petfinder.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ratings_Clinic_ClinicId",
+                        name: "FK_Ratings_Clinics_ClinicId",
                         column: x => x.ClinicId,
-                        principalTable: "Clinic",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalTable: "Clinics",
+                        principalColumn: "ClinicId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -399,7 +399,7 @@ namespace Petfinder.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Clinic");
+                name: "Clinics");
 
             migrationBuilder.DropTable(
                 name: "Shelters");

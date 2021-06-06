@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace Petfinder.Models
 {
-    public class PetViewModel
+    public class ClinicRatingModel
     {
-        public IEnumerable<Pet> Pets { get; set; }
-        public IEnumerable<Shelter> Shelters { get; set; }
+        public Clinic Clinic { get; set; }
+        public Rating Rating { get; set; }
+        public IEnumerable<Clinic> Clinics{ get; set; }
         public IEnumerable<Rating> Ratings { get; set; }
 
     }

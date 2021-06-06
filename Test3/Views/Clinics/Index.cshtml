@@ -1,9 +1,5 @@
 ﻿@model IEnumerable<Petfinder.Models.Clinic>
 
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -12,56 +8,29 @@
     <title>Index</title>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nip)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nip)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+    <p class="w-36">
+        <a class="text-center flex bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" asp-action="Create">Create New</a>
+    </p>
+
+
     </tbody>
-</table>
+    <table class="table">
+        <div class="bg-gray-200">
+            <div class="max-w-md sm:max-w-xl lg:max-w-6xl mx-auto px-8 lg:px-12 py-8">
+                <p class="m-auto text-gray-600 text-2xl text-center">Available Vets</p>
+                <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    @foreach (var clinic in Model)
+                    {
+                        <div onclick="location.href='/Clinics/Details/@clinic.ClinicId';" class="tile-background-animated">
+                            <div class="tile-image" style="background-image: url(https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)"></div>
+                            <h2 class="tile-pet-name">@clinic.Name</h2>
+                            <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </table>
 </body>
 </html>
