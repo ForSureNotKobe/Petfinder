@@ -32,11 +32,12 @@ namespace Petfinder.Controllers
             PetViewModel petViewModel = new PetViewModel
             {
                 Pets = _context.Pets,
-                Shelters = _context.Shelters
+                Shelters = _context.Shelters,
+                Selection = new List<string>()
             };
             ViewData["Name"] = new SelectList(_context.Shelters, "Name", "Name");
 
-
+            
             List<SelectListItem> items = new List<SelectListItem>();
             SelectListItem item1 = new SelectListItem() { Text = "Latest post date", Value = "PetId", Selected = true};
             SelectListItem item2 = new SelectListItem() { Text = "Oldest post date", Value = "PetIdDesc" };
@@ -66,19 +67,25 @@ namespace Petfinder.Controllers
             {
 
                 case "PetIdDesc":
-                    return View(petViewModel.Pets.OrderByDescending(p => p.PetId).ToList());
+                   petViewModel.Pets = petViewModel.Pets.OrderByDescending(p => p.PetId).ToList();
+                    return View(petViewModel);
                 case "Name":
-                    return View(petViewModel.Pets.OrderBy(p => p.Name).ToList());
+                    petViewModel.Pets = petViewModel.Pets.OrderBy(p => p.Name).ToList();
+                    return View(petViewModel);
                 case "NameDesc":
-                    return View(petViewModel.Pets.OrderByDescending(p => p.Name).ToList());
+                    petViewModel.Pets = petViewModel.Pets.OrderByDescending(p => p.Name).ToList();
+                    return View(petViewModel);
                 case "Age":
-                    return View(petViewModel.Pets.OrderBy(p => p.Age).ToList());
+                    petViewModel.Pets = petViewModel.Pets.OrderBy(p => p.Age).ToList();
+                    return View(petViewModel);
                 case "AgeDesc":
-                    return View(petViewModel.Pets.OrderByDescending(p => p.Age).ToList());
+                    petViewModel.Pets = petViewModel.Pets.OrderByDescending(p => p.Age).ToList();
+                    return View(petViewModel);
                 default:
-                    return View(petViewModel.Pets.OrderBy(p => p.PetId).ToList());
+                    petViewModel.Pets = petViewModel.Pets.OrderBy(p => p.PetId).ToList();
+                    return View(petViewModel);
 
-               
+
             }
         }
         // GET: Pets/Details/5
@@ -218,7 +225,7 @@ namespace Petfinder.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(IFormCollection formCollection)
+        public IActionResult Index(IFormCollection formCollection, string selectedValue = null)
         {
 
             PetViewModel petViewModel = new PetViewModel
