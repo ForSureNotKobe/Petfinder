@@ -13,9 +13,11 @@ namespace Petfinder.Models
         public PetfinderContext(DbContextOptions<PetfinderContext> options) : base(options)
         { }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Rating> Admins { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
         public DbSet<Shelter> Shelters { get; set; }
         public DbSet<Pet> Pets { get; set; }
+        public DbSet<Petfinder.Models.Clinic> Clinic { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -38,6 +40,5 @@ namespace Petfinder.Models
             modelBuilder.Entity<Clinic>()
                 .HasMany(r => r.Ratings);
         }
-        public DbSet<Petfinder.Models.Clinic> Clinic { get; set; }
     }
 }
