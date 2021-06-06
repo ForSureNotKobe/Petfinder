@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Petfinder</title>
     
     <link rel="stylesheet" href="~/css/output.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
@@ -54,13 +55,18 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="page-container">
+        <div class="content-container">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+        <div class="add-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Ce3cES-Y80RD4Woq2YzwXErhHffvgD2_esqmjz39L1bXxXu9m7aHyE-UFWr9hxxFIBU&usqp=CAU" alt="ad-image">
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top  footer text-muted">
         <div class="container">
             &copy; 2021 - Petfinder - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
