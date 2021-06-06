@@ -16,6 +16,7 @@ namespace Petfinder.Models
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Shelter> Shelters { get; set; }
         public DbSet<Pet> Pets { get; set; }
+
         public DbSet<Clinic> Clinics { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
