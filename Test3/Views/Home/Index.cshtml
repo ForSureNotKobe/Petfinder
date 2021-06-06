@@ -1,29 +1,83 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    int count = 0;
 }
 
-<div class="bg-gray-200">
-    <div class="max-w-md sm:max-w-xl lg:max-w-6xl mx-auto px-8 lg:px-12 py-8">
-        <p class="m-auto text-gray-600 text-2xl text-center">New pets available for adoption</p>
-        <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<!DOCTYPE html>
 
-            <!-- to wrzucic w foreach -->
-            <div onclick="location.href='/identity/account/login';" class="tile-background-animated">
-                <div class="tile-image" style="background-image: url(https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)"></div>
-                <h2 class="tile-pet-name">NAME</h2>
-                <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <div class="bg-gray-200">
+        <div class="max-w-md sm:max-w-xl lg:max-w-6xl mx-auto px-8 lg:px-12 py-8">
+            <p class="m-auto text-gray-600 text-2xl text-center">New pets available for adoption</p>
+            <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+                @foreach (var pet in ViewBag.Pets)
+                {
+                    if (count == 4)
+                    {
+                        count = 0;
+                        break;
+                    }
+                    <div onclick="location.href='/identity/account/login';" class="tile-background-animated">
+                        <div class="tile-image" style="background-image: url(https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)"></div>
+                        <h2 class="tile-pet-name">@pet.Name</h2>
+                    </div>
+                    count++;
+                }
+
             </div>
 
+            <p class="m-auto text-gray-600 text-2xl text-center">Recently lost pets</p>
+            <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-            <!-- end foreach -->
+                @foreach (var post in ViewBag.Posts)
+                {
+                    if (count == 4)
+                    {
+                        count = 0;
+                        break;
+                    }
+                    if (post.Type == 0)
+                    {
+                        <div onclick="location.href='/identity/account/login';" class="tile-background-animated">
+                            <div class="tile-image" style="background-image: url(https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)"></div>
+                            <h2 class="tile-pet-name">@post.Title</h2>
+                        </div>
+                    }
+                    count++;
+                }
 
+            </div>
 
+            <p class="m-auto text-gray-600 text-2xl text-center">Recently found pets</p>
+            <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+                @foreach (var post in ViewBag.Posts)
+                {
+                    if (count == 4)
+                    {
+                        count = 0;
+                        break;
+                    }
+                    if (post.Type == 1)
+                    {
+                        <div onclick="location.href='/identity/account/login';" class="tile-background-animated">
+                            <div class="tile-image" style="background-image: url(https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)"></div>
+                            <h2 class="tile-pet-name">@post.Title</h2>
+                        </div>
+                    }
+                    count++;
+                }
+
+            </div>
         </div>
     </div>
-</div>
 
-
-@*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>*@
+</body>
+</html>

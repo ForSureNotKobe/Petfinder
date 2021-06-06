@@ -17,20 +17,44 @@ namespace Petfinder.Controllers
         {
             _context = context;
         }
-
-        // GET: Pets
-       
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(String selectedValue)
         {
-            if (!String.IsNullOrEmpty(searchString))
+            List<SelectListItem> items = new List<SelectListItem>();
+            SelectListItem item1 = new SelectListItem() { Text = "Latest post date", Value = "PetId", Selected = true};
+            SelectListItem item2 = new SelectListItem() { Text = "Oldest post date", Value = "PetIdDesc" };
+            SelectListItem item3 = new SelectListItem() { Text = "Name A-Z", Value = "Name" };
+            SelectListItem item4 = new SelectListItem() { Text = "Name Z-A", Value = "NameDesc" };
+            SelectListItem item5 = new SelectListItem() { Text = "Youngest first", Value = "Age" };
+            SelectListItem item6 = new SelectListItem() { Text = "Oldest first", Value = "AgeDesc" };
+            items.Add(item1);
+            items.Add(item2);
+            items.Add(item3);
+            items.Add(item4);
+            items.Add(item5);
+            items.Add(item6);
+
+            if (selectedValue != null)
             {
-                return View(await _context.Pets
-                   .Where(p => p.Name.Contains(searchString) ||
-                   p.Type.Contains(searchString))
-                   .ToListAsync());
+                items.Where(i => i.Value == selectedValue.ToString()).First().Selected = true;
             }
-            else
-                return View(await _context.Pets.ToListAsync());
+
+            ViewBag.SortParams = items;
+
+            switch (selectedValue)
+            {
+                case "PetIdDesc":
+                    return View(await _context.Pets.OrderByDescending(p => p.PetId).ToListAsync());
+                case "Name":
+                    return View(await _context.Pets.OrderBy(p => p.Name).ToListAsync());
+                case "NameDesc":
+                    return View(await _context.Pets.OrderByDescending(p => p.Name).ToListAsync());
+                case "Age":
+                    return View(await _context.Pets.OrderBy(p => p.Age).ToListAsync());
+                case "AgeDesc":
+                    return View(await _context.Pets.OrderByDescending(p => p.Age).ToListAsync());
+                default:
+                    return View(await _context.Pets.OrderBy(p => p.PetId).ToListAsync());
+            }
         }
 
         // GET: Pets/Details/5
