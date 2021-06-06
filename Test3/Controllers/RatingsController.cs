@@ -45,7 +45,7 @@ namespace Petfinder.Controllers
         // GET: Ratings/Create
         public IActionResult Create()
         {
-            ViewData["ClinicId"] = new SelectList(_context.Clinics, "ClinicId", "ClinicId");
+            ViewData["Name"] = new SelectList(_context.Clinics, "Name", "Name");
             return View();
         }
 

@@ -39,8 +39,10 @@ namespace Petfinder.Controllers
                 Clinics = _context.Clinics,
                 Ratings = _context.Ratings
             };
-            var clinic = clinicRatingModel.Clinics                
+
+            clinicRatingModel.Clinic = clinicRatingModel.Clinics                
                 .FirstOrDefault(m => m.ClinicId == id);
+            clinicRatingModel.Ratings = clinicRatingModel.Ratings.Where(m => m.ClinicId == id);
             return View(clinicRatingModel);
 
         }
