@@ -43,6 +43,5 @@ namespace Petfinder.Models
             modelBuilder.Entity<Clinic>()
                 .HasMany(r => r.Ratings);
         }
-        
     }
 }
