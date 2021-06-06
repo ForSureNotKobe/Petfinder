@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,30 +22,33 @@ namespace Petfinder.Controllers
         // GET: Clinics
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clinic.ToListAsync());
+            return View(await _context.Clinics.ToListAsync());
         }
 
         // GET: Clinics/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var clinic = await _context.Clinic
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (clinic == null)
+            ViewData["Name"] = new SelectList(_context.Ratings, "Opinion", "Opinion");
+            ClinicRatingModel clinicRatingModel = new ClinicRatingModel
             {
-                return NotFound();
-            }
+                Clinics = _context.Clinics,
+                Ratings = _context.Ratings
+            };
+            var clinic = clinicRatingModel.Clinics                
+                .FirstOrDefault(m => m.ClinicId == id);
+            return View(clinicRatingModel);
 
-            return View(clinic);
         }
 
         // GET: Clinics/Create
         public IActionResult Create()
         {
+            ViewData["Name"] = new SelectList(_context.Clinics, "Name", "Name");
             return View();
         }
 
@@ -72,7 +76,7 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
-            var clinic = await _context.Clinic.FindAsync(id);
+            var clinic = await _context.Clinics.FindAsync(id);
             if (clinic == null)
             {
                 return NotFound();
@@ -87,7 +91,7 @@ namespace Petfinder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,PhoneNumber,Address,Nip")] Clinic clinic)
         {
-            if (id != clinic.Id)
+            if (id != clinic.ClinicId)
             {
                 return NotFound();
             }
@@ -101,7 +105,7 @@ namespace Petfinder.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClinicExists(clinic.Id))
+                    if (!ClinicExists(clinic.ClinicId))
                     {
                         return NotFound();
                     }
@@ -123,8 +127,8 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
-            var clinic = await _context.Clinic
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var clinic = await _context.Clinics
+                .FirstOrDefaultAsync(m => m.ClinicId == id);
             if (clinic == null)
             {
                 return NotFound();
@@ -138,17 +142,16 @@ namespace Petfinder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clinic = await _context.Clinic.FindAsync(id);
-            _context.Clinic.Remove(clinic);
+            var clinic = await _context.Clinics.FindAsync(id);
+            _context.Clinics.Remove(clinic);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClinicExists(int id)
         {
-            return _context.Clinic.Any(e => e.Id == id);
+            return _context.Clinics.Any(e => e.ClinicId == id);
         }
-
-        
+       
     }
 }

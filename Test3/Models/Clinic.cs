@@ -7,7 +7,7 @@ namespace Petfinder.Models
 {
     public class Clinic
     {
-        public int Id { get; set; }
+        public int ClinicId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }

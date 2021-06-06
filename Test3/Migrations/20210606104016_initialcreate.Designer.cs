@@ -10,8 +10,8 @@ using Petfinder.Models;
 namespace Petfinder.Migrations
 {
     [DbContext(typeof(PetfinderContext))]
-    [Migration("20210601163636_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210606104016_initialcreate")]
+    partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -158,7 +158,7 @@ namespace Petfinder.Migrations
 
             modelBuilder.Entity("Petfinder.Models.Clinic", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ClinicId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -178,9 +178,9 @@ namespace Petfinder.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ClinicId");
 
-                    b.ToTable("Clinic");
+                    b.ToTable("Clinics");
                 });
 
             modelBuilder.Entity("Petfinder.Models.Pet", b =>
@@ -268,7 +268,7 @@ namespace Petfinder.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClinicId")
+                    b.Property<int>("ClinicId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -477,13 +477,17 @@ namespace Petfinder.Migrations
 
             modelBuilder.Entity("Petfinder.Models.Rating", b =>
                 {
-                    b.HasOne("Petfinder.Models.Clinic", null)
+                    b.HasOne("Petfinder.Models.Clinic", "Clinic")
                         .WithMany("Ratings")
-                        .HasForeignKey("ClinicId");
+                        .HasForeignKey("ClinicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Petfinder.Models.User", "User")
                         .WithMany("Ratings")
                         .HasForeignKey("UserId1");
+
+                    b.Navigation("Clinic");
 
                     b.Navigation("User");
                 });

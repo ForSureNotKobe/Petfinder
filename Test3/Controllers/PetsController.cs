@@ -68,7 +68,7 @@ namespace Petfinder.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id");
+            ViewData["Name"] = new SelectList(_context.Shelters, "Name", "Name");
             return View();
         }
 
@@ -85,7 +85,7 @@ namespace Petfinder.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", pet.ShelterId);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId", pet.ShelterId);
             return View(pet);
         }
 
@@ -193,13 +193,14 @@ namespace Petfinder.Controllers
             Petfinder.Models.Difficulty difficultyFilter = (Petfinder.Models.Difficulty)Convert.ToInt32(formCollection["Difficulty"]);
             ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", formCollection["ShelterId"]);
             return View(await _context.Pets
-                .Where(p => 
+                .Where(p =>                 
                 (p.Sex.Equals(sexFilter) || Convert.ToInt32(formCollection["Sex"]).Equals(9)) &&
                 (p.Origins.Equals(originsFilter) || Convert.ToInt32(formCollection["Origins"]).Equals(9)) &&
                 (p.BreedType.Equals(breedTypeFilter) || Convert.ToInt32(formCollection["BreedType"]).Equals(9)) &&
                 (p.Size.Equals(sizeFilter) || Convert.ToInt32(formCollection["Size"]).Equals(9)) &&
                 (p.Difficulty.Equals(difficultyFilter) || Convert.ToInt32(formCollection["Difficulty"]).Equals(9)))
                 .ToListAsync());
+
         }
     }
 }
