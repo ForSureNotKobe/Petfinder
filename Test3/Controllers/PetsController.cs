@@ -22,14 +22,20 @@ namespace Petfinder.Controllers
         }
 
 
-        public async Task<IActionResult> Index(string selectedValue, string searchString)
+        // GET: Pets
+        public IActionResult Index(string searchString, string selectedValue)
         {
+            //dynamic myModel = new ExpandoObject();
+            //myModel.Pets = _context.Pets;
+            //myModel.Shelters = _context.Shelters;
+
             PetViewModel petViewModel = new PetViewModel
             {
                 Pets = _context.Pets,
                 Shelters = _context.Shelters
             };
             ViewData["Name"] = new SelectList(_context.Shelters, "Name", "Name");
+
 
             List<SelectListItem> items = new List<SelectListItem>();
             SelectListItem item1 = new SelectListItem() { Text = "Latest post date", Value = "PetId", Selected = true};
@@ -212,25 +218,34 @@ namespace Petfinder.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(IFormCollection formCollection)
+        public IActionResult Index(IFormCollection formCollection)
         {
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id");
 
-            Petfinder.Models.Sex sexFilter = (Petfinder.Models.Sex)Convert.ToInt32(formCollection["Sex"]);
-            Petfinder.Models.Origins originsFilter = (Petfinder.Models.Origins)Convert.ToInt32(formCollection["Origins"]);
-            Petfinder.Models.BreedType breedTypeFilter = (Petfinder.Models.BreedType)Convert.ToInt32(formCollection["BreedType"]);
-            Petfinder.Models.Size sizeFilter = (Petfinder.Models.Size)Convert.ToInt32(formCollection["Size"]);
-            Petfinder.Models.Difficulty difficultyFilter = (Petfinder.Models.Difficulty)Convert.ToInt32(formCollection["Difficulty"]);
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", formCollection["ShelterId"]);
-            return View(await _context.Pets
-                .Where(p =>                 
+            PetViewModel petViewModel = new PetViewModel
+            {
+                Pets = _context.Pets,
+                Shelters = _context.Shelters
+            };
+
+            Sex sexFilter = (Sex)Convert.ToInt32(formCollection["Sex"]);
+            Origins originsFilter = (Origins)Convert.ToInt32(formCollection["Origins"]);
+            BreedType breedTypeFilter = (BreedType)Convert.ToInt32(formCollection["BreedType"]);
+            Size sizeFilter = (Size)Convert.ToInt32(formCollection["Size"]);
+            Difficulty difficultyFilter = (Difficulty)Convert.ToInt32(formCollection["Difficulty"]);
+           // Shelter shelterFilter = formCollection["Difficulty"];
+
+            ViewData["Name"] = new SelectList(petViewModel.Shelters, "Name", "Name");
+
+            petViewModel.Pets = petViewModel.Pets
+                .Where(p =>
                 (p.Sex.Equals(sexFilter) || Convert.ToInt32(formCollection["Sex"]).Equals(9)) &&
                 (p.Origins.Equals(originsFilter) || Convert.ToInt32(formCollection["Origins"]).Equals(9)) &&
                 (p.BreedType.Equals(breedTypeFilter) || Convert.ToInt32(formCollection["BreedType"]).Equals(9)) &&
                 (p.Size.Equals(sizeFilter) || Convert.ToInt32(formCollection["Size"]).Equals(9)) &&
                 (p.Difficulty.Equals(difficultyFilter) || Convert.ToInt32(formCollection["Difficulty"]).Equals(9)))
-                .ToListAsync());
+                .ToList();
 
+            return View(petViewModel);
         }
     }
 }
