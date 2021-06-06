@@ -15,9 +15,10 @@ namespace Petfinder.Models
         public int RatingId { get; set; }
         public string Content { get; set; }
         public Opinion? Opinion { get; set; }
-
+        public Clinic Clinic { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public int ClinicId { get; set; }
     }
 }
 

@@ -21,23 +21,26 @@
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="relative w-full mb-3">
-                            <label asp-for="Content" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
-                            <input asp-for="Content" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
-                            <span asp-validation-for="Content" class="text-danger"></span>
-                        </div>
-                        <div class="relative w-full mb-3">
-                            <label asp-for="Opinion" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
-                            <input asp-for="Opinion" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
+                            <label asp-for="Opinion" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>                            
+                            <select Name="Opinion" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option value=2>Good</option>
+                                <option value=1>Neutral</option>
+                                <option value=0>Bad</option>
+                            </select>
                             <span asp-validation-for="Opinion" class="text-danger"></span>
                         </div>
                         <div class="relative w-full mb-3">
-                            <label asp-for="UserId" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
-                            <input asp-for="UserId" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
-                            <span asp-validation-for="UserId" class="text-danger"></span>
+                            <label asp-for="Content" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
+                            <input asp-for="Content" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>      
+                        <div class="relative w-full mb-3">
+                            <label asp-for="ClinicId" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">Vet</label>
+                            <select asp-for="ClinicId" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="ClinicId" asp-items="ViewBag.ClinicId"></select>
                         </div>
                         <div class="relative w-full mb-3">
                             <input type="submit" value="Create" class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" type="button"
-                                           style="transition: all 0.15s ease 0s;" />
+                                   style="transition: all 0.15s ease 0s;" />
                         </div>
                     </form>
                 </div>
