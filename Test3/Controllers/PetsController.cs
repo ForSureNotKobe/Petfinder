@@ -23,70 +23,22 @@ namespace Petfinder.Controllers
 
 
         // GET: Pets
-        public IActionResult Index(string searchString, string selectedValue)
+        public IActionResult Index(string searchString)
         {
-            //dynamic myModel = new ExpandoObject();
-            //myModel.Pets = _context.Pets;
-            //myModel.Shelters = _context.Shelters;
-
             PetViewModel petViewModel = new PetViewModel
             {
                 Pets = _context.Pets,
-                Shelters = _context.Shelters,
-                Selection = new List<string>()
+                Shelters = _context.Shelters
             };
             ViewData["Name"] = new SelectList(_context.Shelters, "Name", "Name");
-
-            
-            List<SelectListItem> items = new List<SelectListItem>();
-            SelectListItem item1 = new SelectListItem() { Text = "Latest post date", Value = "PetId", Selected = true};
-            SelectListItem item2 = new SelectListItem() { Text = "Oldest post date", Value = "PetIdDesc" };
-            SelectListItem item3 = new SelectListItem() { Text = "Name A-Z", Value = "Name" };
-            SelectListItem item4 = new SelectListItem() { Text = "Name Z-A", Value = "NameDesc" };
-            SelectListItem item5 = new SelectListItem() { Text = "Youngest first", Value = "Age" };
-            SelectListItem item6 = new SelectListItem() { Text = "Oldest first", Value = "AgeDesc" };
-            items.Add(item1);
-            items.Add(item2);
-            items.Add(item3);
-            items.Add(item4);
-            items.Add(item5);
-            items.Add(item6);
-
-            if (selectedValue != null)
-            {
-                items.Where(i => i.Value == selectedValue.ToString()).First().Selected = true;
-            }
-
-            ViewBag.SortParams = items;
 
             if(!String.IsNullOrEmpty(searchString))
             {
                 petViewModel.Pets = petViewModel.Pets.Where(p => p.Name.Contains(searchString)).ToList();
             }
-            switch (selectedValue)
-            {
 
-                case "PetIdDesc":
-                   petViewModel.Pets = petViewModel.Pets.OrderByDescending(p => p.PetId).ToList();
-                    return View(petViewModel);
-                case "Name":
-                    petViewModel.Pets = petViewModel.Pets.OrderBy(p => p.Name).ToList();
-                    return View(petViewModel);
-                case "NameDesc":
-                    petViewModel.Pets = petViewModel.Pets.OrderByDescending(p => p.Name).ToList();
-                    return View(petViewModel);
-                case "Age":
-                    petViewModel.Pets = petViewModel.Pets.OrderBy(p => p.Age).ToList();
-                    return View(petViewModel);
-                case "AgeDesc":
-                    petViewModel.Pets = petViewModel.Pets.OrderByDescending(p => p.Age).ToList();
-                    return View(petViewModel);
-                default:
-                    petViewModel.Pets = petViewModel.Pets.OrderBy(p => p.PetId).ToList();
-                    return View(petViewModel);
-
-
-            }
+            return View(petViewModel);
+            
         }
         // GET: Pets/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -225,7 +177,7 @@ namespace Petfinder.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(IFormCollection formCollection, string selectedValue = null)
+        public IActionResult Index(IFormCollection formCollection)
         {
 
             PetViewModel petViewModel = new PetViewModel
@@ -239,6 +191,7 @@ namespace Petfinder.Controllers
             BreedType breedTypeFilter = (BreedType)Convert.ToInt32(formCollection["BreedType"]);
             Size sizeFilter = (Size)Convert.ToInt32(formCollection["Size"]);
             Difficulty difficultyFilter = (Difficulty)Convert.ToInt32(formCollection["Difficulty"]);
+            string orderFilter = formCollection["SortParams"];
            // Shelter shelterFilter = formCollection["Difficulty"];
 
             ViewData["Name"] = new SelectList(petViewModel.Shelters, "Name", "Name");
@@ -252,7 +205,30 @@ namespace Petfinder.Controllers
                 (p.Difficulty.Equals(difficultyFilter) || Convert.ToInt32(formCollection["Difficulty"]).Equals(9)))
                 .ToList();
 
-            return View(petViewModel);
+            switch (orderFilter)
+            {
+
+                case "PetIdDesc":
+                    petViewModel.Pets = petViewModel.Pets.OrderByDescending(p => p.PetId).ToList();
+                    return View(petViewModel);
+                case "Name":
+                    petViewModel.Pets = petViewModel.Pets.OrderBy(p => p.Name).ToList();
+                    return View(petViewModel);
+                case "NameDesc":
+                    petViewModel.Pets = petViewModel.Pets.OrderByDescending(p => p.Name).ToList();
+                    return View(petViewModel);
+                case "Age":
+                    petViewModel.Pets = petViewModel.Pets.OrderBy(p => p.Age).ToList();
+                    return View(petViewModel);
+                case "AgeDesc":
+                    petViewModel.Pets = petViewModel.Pets.OrderByDescending(p => p.Age).ToList();
+                    return View(petViewModel);
+                default:
+                    petViewModel.Pets = petViewModel.Pets.OrderBy(p => p.PetId).ToList();
+                    return View(petViewModel);
+
+
+            }
         }
     }
 }
