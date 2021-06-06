@@ -19,9 +19,41 @@ namespace Petfinder.Controllers
         }
 
         // GET: Posts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String selectedValue)
         {
-            return View(await _context.Posts.ToListAsync());
+
+            List<SelectListItem> items = new List<SelectListItem>();
+            SelectListItem item1 = new SelectListItem() { Text = "Latest first", Value = "PostId", Selected = true };
+            SelectListItem item2 = new SelectListItem() { Text = "Oldest first", Value = "PostIdDesc" };
+            SelectListItem item3 = new SelectListItem() { Text = "Title A-Z", Value = "Title" };
+            SelectListItem item4 = new SelectListItem() { Text = "Title Z-A", Value = "TitleDesc" };
+            SelectListItem item5 = new SelectListItem() { Text = "Type", Value = "Type" };
+            items.Add(item1);
+            items.Add(item2);
+            items.Add(item3);
+            items.Add(item4);
+            items.Add(item5);
+
+            if (selectedValue != null)
+            {
+                items.Where(i => i.Value == selectedValue.ToString()).First().Selected = true;
+            }
+
+            ViewBag.SortParams = items;
+
+            switch (selectedValue)
+            {
+                case "PostIdDesc":
+                    return View(await _context.Posts.OrderByDescending(p => p.PostId).ToListAsync());
+                case "Title":
+                    return View(await _context.Posts.OrderBy(p => p.Title).ToListAsync());
+                case "TitleDesc":
+                    return View(await _context.Posts.OrderByDescending(p => p.Title).ToListAsync());
+                case "Type":
+                    return View(await _context.Posts.OrderByDescending(p => p.Type).ToListAsync());
+                default:
+                    return View(await _context.Posts.OrderBy(p => p.PostId).ToListAsync());
+            }
         }
 
         // GET: Posts/Details/5
