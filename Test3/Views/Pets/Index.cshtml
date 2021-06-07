@@ -8,6 +8,8 @@
     <title>Index</title>
 </head>
 <body>
+
+    @Html.DropDownList("SortParams",null, new {onchange="document.location.href='/Pets?selectedValue='+this.value;"})
     @using (Html.BeginForm("Index", "Pets", FormMethod.Post))
     {
         <div class="grid grid-cols-7 gap-6">
@@ -79,16 +81,8 @@
                         <h2 class="tile-pet-name">@pet.Name</h2>
                         <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
                     </div>
-                }
-                
-                @foreach (var shelter in Model.Shelters)
-                {
-                    <div onclick="location.href='/Shelters/Details/@shelter.ShelterId';" class="tile-background-animated">
-                        <div class="tile-image" style="background-image: url(https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)"></div>
-                        <h2 class="tile-pet-name">@shelter.Name</h2>
-                        <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
-                    </div>
-                }
+
+                }                
 
             </div>
         </div>

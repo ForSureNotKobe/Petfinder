@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Petfinder</title>
     
     <link rel="stylesheet" href="~/css/output.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
@@ -28,11 +29,6 @@
                         </button>
                     </form>
                 </div>
-                <div class="pr-6 m-auto">
-                    <svg class="h-6 w-6 text-white font-bold fill-current stroke-current stroke-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12.76 3.76a6 6 0 0 1 8.48 8.48l-8.53 8.54a1 1 0 0 1-1.42 0l-8.53-8.54a6 6 0 0 1 8.48-8.48l.76.75.76-.75zm7.07 7.07a4 4 0 1 0-5.66-5.66l-1.46 1.47a1 1 0 0 1-1.42 0L9.83 5.17a4 4 0 1 0-5.66 5.66L12 18.66l7.83-7.83z"></path>
-                    </svg>
-                </div>
                 <a class="py-2 p-2 rounded-lg text-white font-bold" href="/Pets">
                     Pets
                 </a>
@@ -54,13 +50,18 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="page-container">
+        <div class="content-container">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+        <div class="add-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Ce3cES-Y80RD4Woq2YzwXErhHffvgD2_esqmjz39L1bXxXu9m7aHyE-UFWr9hxxFIBU&usqp=CAU" alt="ad-image">
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top  footer text-muted">
         <div class="container">
             &copy; 2021 - Petfinder - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

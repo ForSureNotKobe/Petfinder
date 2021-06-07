@@ -35,8 +35,10 @@
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>      
                         <div class="relative w-full mb-3">
-                            <label asp-for="ClinicId" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">Vet</label>
-                            <select asp-for="ClinicId" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="ClinicId" asp-items="ViewBag.ClinicId"></select>
+
+                            <label asp-for="Clinic" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">Vet</label>
+                            <select asp-for="Clinic" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="ClinicId" asp-items="ViewBag.Name"></select>
+
                         </div>
                         <div class="relative w-full mb-3">
                             <input type="submit" value="Create" class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" type="button"
