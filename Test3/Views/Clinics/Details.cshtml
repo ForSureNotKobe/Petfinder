@@ -35,19 +35,24 @@
                     @foreach (var rating in Model.Ratings)
                     {
                         <div onclick="location.href='/Ratings/Details/@rating.RatingId';" class="tile-background-animated">
-                            <div class="tile-image" style="background-image: url(https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)"></div>
+                            <div>
+                                <p style="background-color: #e6e6e6" class="m-auto text-gray-600 text-2xl text-center">@rating.Opinion</p>                                
+                            </div>
                             <h2 class="tile-pet-name">@rating.Content</h2>
                             <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
                         </div>
                     }
-
                 </div>
             </div>
         }
     </div>
-    <div>
-
-        <a asp-action="Index">Back to List</a>
+    <div class="grid grid-rows-2 gap-10">
+        <div>
+            <a class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" href="/Ratings/Create">Add new rating</a>
+        </div>
+        <div>
+            <a class="bg-gray-900 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" asp-action="Index">Back to List</a>
+        </div>
     </div>
 </body>
 </html>

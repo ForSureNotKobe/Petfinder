@@ -9,16 +9,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Dynamic;
 using Petfinder.Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Petfinder.Controllers
 {
     public class PetsController : Controller
     {
         private readonly PetfinderContext _context;
+        private IHostingEnvironment _environment;
 
-        public PetsController(PetfinderContext context)
+        public PetsController(PetfinderContext context, IHostingEnvironment environment)
         {
-            _context = context;            
+            _context = context;
+            _environment = environment;
         }
 
 
@@ -254,6 +258,23 @@ namespace Petfinder.Controllers
                 (p.Difficulty.Equals(difficultyFilter) || Convert.ToInt32(formCollection["Difficulty"]).Equals(9)))
                 .ToList();
             return View(petViewModel);
+        }
+        [HttpPost("FileUpload")]
+        public async Task<IActionResult> FileUpload(List<IFormFile> files)
+        {
+            string uploads = Path.Combine(_environment.WebRootPath, "/uploads");
+            foreach (IFormFile file in files)
+            {
+                if (file.Length > 0)
+                {
+                    string filePath = Path.Combine(uploads, file.FileName);
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                }
+            }
+            return View();
         }
     }
 }
