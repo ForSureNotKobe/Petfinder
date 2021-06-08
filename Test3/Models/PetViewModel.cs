@@ -7,7 +7,6 @@ namespace Petfinder.Models
 {
     public class PetViewModel
     {
-        public List<string> Selection { get; set; }
         public IEnumerable<Pet> Pets { get; set; }
         public IEnumerable<Shelter> Shelters { get; set; }
         public IEnumerable<Rating> Ratings { get; set; }
