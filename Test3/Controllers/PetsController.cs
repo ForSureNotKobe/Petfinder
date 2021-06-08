@@ -116,7 +116,7 @@ namespace Petfinder.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            ViewData["Name"] = new SelectList(_context.Shelters, "Name", "Name");
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "Name");
             return View();
         }
 
@@ -133,7 +133,7 @@ namespace Petfinder.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId", pet.ShelterId);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId");
             return View(pet);
         }
 
@@ -151,7 +151,7 @@ namespace Petfinder.Controllers
             {
                 return NotFound();
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", pet.ShelterId);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "Name");
             return View(pet);
         }
 
@@ -167,7 +167,7 @@ namespace Petfinder.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "Name");
             if (ModelState.IsValid)
             {
                 try
@@ -188,7 +188,7 @@ namespace Petfinder.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", pet.ShelterId);
+            
             return View(pet);
         }
 

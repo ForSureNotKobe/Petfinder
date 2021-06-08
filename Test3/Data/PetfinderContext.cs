@@ -34,14 +34,11 @@ namespace Petfinder.Models
                 .WithMany(u => u.Ratings);
 
             modelBuilder.Entity<Rating>()
-                .HasOne(r => r.Clinic);                
+                .HasOne(r => r.Clinic)  
+                .WithMany(u => u.Ratings);
 
             modelBuilder.Entity<User>()
-                .HasOne(c => c.Clinic);
-
-
-            modelBuilder.Entity<Clinic>()
-                .HasMany(r => r.Ratings);
+                .HasOne(c => c.Clinic);         
         }
         
     }
