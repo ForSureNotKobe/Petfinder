@@ -9,6 +9,51 @@
     <title>Details</title>
 </head>
 <body>
+    <div class="big-tiles-flex">
+        <div class="big-tile-description">
+            <p class="font-semibold text-2xl text-center lg:text-left"> @Html.DisplayFor(model => model.Clinic.Name)</p>
+            <div class="border-bar"></div>
+            <div class="grid grid-cols-1 gap-2 lg:gap-4">
+                <div class="shelter-tile-flex">
+                    <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20S3 10.87 3 7a7 7 0 1 1 14 0c0 3.87-7 13-7 13zm0-11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" /></svg>
+                    <div class="flex flex-col shelter-tile-text">
+                        <p>Address</p>
+                    </div>
+                </div>
+                <div class="ml-6 border-bar"></div>
+                <div class="shelter-tile-flex">
+                    <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 18.35V19a1 1 0 0 1-1 1h-2A17 17 0 0 1 0 3V1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4c0 .56-.31 1.31-.7 1.7L3.16 8.84c1.52 3.6 4.4 6.48 8 8l2.12-2.12c.4-.4 1.15-.71 1.7-.71H19a1 1 0 0 1 .99 1v3.35z" /></svg>
+                    <div class="shelter-tile-text">111111111</div>
+                </div>
+                <div class="shelter-tile-flex">
+                    <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13.6 13.47A4.99 4.99 0 0 1 5 10a5 5 0 0 1 8-4V5h2v6.5a1.5 1.5 0 0 0 3 0V10a8 8 0 1 0-4.42 7.16l.9 1.79A10 10 0 1 1 20 10h-.18.17v1.5a3.5 3.5 0 0 1-6.4 1.97zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" /></svg>
+                    <a class="shelter-tile-text" href="mailto: asd@asd.com">asd@asd.com</a>
+                </div>
+                <div class="border-bar"></div>
+                <div class="shelter-tile-flex">
+                    <p class="text-xl text-gray-600 px-1">Nip:</p>
+                    <p class="text-xl text-gray-600 px-1">123</p>
+                </div>
+            </div>
+        </div>
+        <div class="medium-tiles-flex">
+            <div class="medium-tile">
+                <div class="p-2 mx-auto w-max">
+                    <button onclick="location.href='/Ratings/Create';" class="btn-green mx-2">Add new rating</button>
+                    <button onclick="location.href='/Shelters/Index/';" class="btn-blue mx-2">Back to List</button>
+                </div>
+            </div>
+
+            <div class="h-64 bg-red-300 text-center mb-4">
+                <p class="text-yellow-600 text-3xl">AD</p>
+            </div>
+            <div class="medium-tile">
+                <p class="text-center text-2xl pb-2">Ratings for this vet</p>
+            </div>
+        </div>
+    </div>
+
+
     <p class="m-auto text-gray-600 text-2xl text-center">Vet:</p>
     <div>
         <div>
@@ -36,7 +81,7 @@
                     {
                         <div onclick="location.href='/Ratings/Details/@rating.RatingId';" class="tile-background-animated">
                             <div>
-                                <p style="background-color: #e6e6e6" class="m-auto text-gray-600 text-2xl text-center">@rating.Opinion</p>                                
+                                <p style="background-color: #e6e6e6" class="m-auto text-gray-600 text-2xl text-center">@rating.Opinion</p>
                             </div>
                             <h2 class="tile-pet-name">@rating.Content</h2>
                             <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->

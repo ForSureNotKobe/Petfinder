@@ -3,12 +3,26 @@
 @tailwind components;
 @tailwind utilities;
 
-.tile-background-animated {
-    @apply cursor-pointer bg-white shadow-xl lg:max-w-md rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105;
+@layer components {
+    .tile-background-color {
+        @apply bg-white;
+    }
+
+    .website-background-color {
+        @apply bg-gray-200;
+    }
+
+    .tile-text-color {
+        @apply text-gray-700;
+    }
+
+    .btn {
+        @apply text-white font-bold py-2 px-4 rounded;
+    }
 }
 
 .tile-background {
-    @apply cursor-pointer bg-white shadow-xl lg:max-w-md rounded-lg;
+    @apply bg-white shadow-xl lg:max-w-md rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105;
 }
 
 .tile-image {
@@ -21,6 +35,55 @@
 
 .tile-pet-text {
     @apply overflow-ellipsis truncate px-4 pb-2 text-center;
+}
+
+.border-bar {
+    @apply my-2 h-0.5 bg-gray-100 rounded-full;
+}
+
+.svg-icon {
+    @apply mt-2 w-5 h-5 fill-current text-gray-600 text-center align-middle;
+}
+
+.shelter-tile-flex {
+    @apply flex flex-row pb-4;
+}
+
+.shelter-tile-text {
+    @apply px-6 text-xl text-gray-600;
+}
+
+.lightbox-img-big-tile {
+    @apply tile-background-color rounded-b-xl mx-2 lg:mx-5 p-2 lg:p-5;
+}
+
+.lightbox-img {
+    @apply rounded-xl h-36 lg:h-80 m-auto;
+}
+
+.big-tiles-flex {
+    @apply flex flex-col lg:flex-row gap-5 website-background-color p-2 lg:p-5;
+}
+
+.big-tile-description {
+    @apply rounded-2xl tile-background-color p-4 lg:p-8 tile-text-color lg:w-2/3;
+}
+
+.medium-tile {
+    @apply rounded-xl tile-background-color mb-4 p-4 tile-text-color;
+}
+
+
+.btn-green {
+    @apply btn bg-green-500 hover:bg-green-700;
+}
+
+.btn-red {
+    @apply btn bg-red-500 hover:bg-red-700;
+}
+
+.btn-blue {
+    @apply btn bg-blue-500 hover:bg-blue-700;
 }
 
 
