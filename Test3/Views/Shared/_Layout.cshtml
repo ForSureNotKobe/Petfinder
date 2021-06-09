@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Petfinder</title>
     
     <link rel="stylesheet" href="~/css/output.css" />
+    <link rel="stylesheet" href="~/css/lightbox.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -62,7 +63,7 @@
             </div>
         </nav>
     </header>
-    <div class="page-container">
+    <div class="page-container bg-gray-200">
         <div class="content-container">
             <main role="main">
                 @RenderBody()
@@ -78,9 +79,10 @@
             &copy; 2021 - Petfinder - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+    <script src="~/js/lightbox.min.js" asp-append-version="true"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
