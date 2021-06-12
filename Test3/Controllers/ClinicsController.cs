@@ -122,7 +122,7 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,PhoneNumber,Address,Nip")] Clinic clinic)
+        public async Task<IActionResult> Edit(int id, [Bind("ClinicId,Name,Email,PhoneNumber,Address,Nip")] Clinic clinic)
         {
             if (id != clinic.ClinicId)
             {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Petfinder.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -133,7 +133,7 @@ namespace Petfinder.Migrations
                     Age = table.Column<int>(type: "int", nullable: false),
                     Sex = table.Column<int>(type: "int", nullable: false),
                     Origins = table.Column<int>(type: "int", nullable: false),
-                    BreedType = table.Column<int>(type: "int", nullable: false),
+                    BreedType = table.Column<int>(type: "int", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Size = table.Column<int>(type: "int", nullable: true),
                     Difficulty = table.Column<int>(type: "int", nullable: true),

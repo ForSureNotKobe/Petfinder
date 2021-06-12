@@ -10,8 +10,8 @@ using Petfinder.Models;
 namespace Petfinder.Migrations
 {
     [DbContext(typeof(PetfinderContext))]
-    [Migration("20210606104016_initialcreate")]
-    partial class initialcreate
+    [Migration("20210608154628_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -193,7 +193,7 @@ namespace Petfinder.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("BreedType")
+                    b.Property<int?>("BreedType")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
