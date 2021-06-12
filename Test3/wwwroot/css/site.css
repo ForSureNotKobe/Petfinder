@@ -45,12 +45,10 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
-
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
-
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -68,4 +66,24 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.page-container {
+    display: flex;
+    width: 100%;
+    flex-direction:row;
+}
+.content-container{
+    width:85%;
+}
+
+.add-container {
+    width: 15%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+}
+.add-container img{
+    width: 100%;
 }

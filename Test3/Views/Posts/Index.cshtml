@@ -10,7 +10,7 @@
 </head>
 <body>
     <p>
-        <button asp-action="Create">Create New Post</button>
+        <a href="/Posts/Create">Create New Post</a>
         @Html.DropDownList("SortParams", null, new { onchange = "document.location.href='/Posts?selectedValue='+this.value;" })
     </p>
     <div class="bg-gray-200">

@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <form asp-action="Create">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>                                
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="relative w-full mb-3">
                                     <label asp-for="Name" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">Name</label>
                                     <input asp-for="Name" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name" />
@@ -39,8 +39,8 @@
                                     <label asp-for="Sex" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">Sex</label>
                                     @*<input asp-for="Sex" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Sex" />*@
                                     <select asp-for="Sex" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                                        <option value = 0>Male</option>
-                                        <option value = 1>Female</option>
+                                        <option value=0>Male</option>
+                                        <option value=1>Female</option>
                                     </select>
                                     <span asp-validation-for="Sex" class="text-danger"></span>
                                 </div>
@@ -83,13 +83,13 @@
                                 </div>
                                 <div class="relative w-full mb-3">
                                     <label asp-for="ShelterId" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">ShelterId</label>
-                                    <select asp-for="ShelterId" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="ShelterId" asp-items="ViewBag.Name"></select>
+                                    <select asp-for="ShelterId" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="ShelterId" asp-items="ViewBag.ShelterId"></select>
                                 </div>
                                 <div class="relative w-full mb-3">
                                     <label asp-for="PhotoUrl" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password">PhotoUrl</label>
                                     <input asp-for="PhotoUrl" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="PhotoUrl" />
                                     <span asp-validation-for="PhotoUrl" class="text-danger"></span>
-                                </div>
+                                </div>                                
                                 <div class="relative w-full mb-3">
                                     <input type="submit" value="Create" class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                                            type="button"
@@ -105,7 +105,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="bg-gray-900 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

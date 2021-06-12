@@ -40,8 +40,7 @@ namespace Petfinder.Models
         [Required]
         public Sex? Sex { get; set; }
         [Required]
-        public Origins? Origins { get; set; }
-        [Required]
+        public Origins? Origins { get; set; }        
         public BreedType? BreedType { get; set; }
         [Required]
         public string Description { get; set; }
