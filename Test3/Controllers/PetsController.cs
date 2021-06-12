@@ -170,6 +170,8 @@ namespace Petfinder.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
             if (id == null)
             {
                 return NotFound();
