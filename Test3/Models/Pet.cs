@@ -36,6 +36,7 @@ namespace Petfinder.Models
         [Required]
         public string Name { get; set; }
         [Required]
+        [Range(0,99,ErrorMessage ="Invalid age")]
         public int Age { get; set; }
         [Required]
         public Sex? Sex { get; set; }
@@ -43,9 +44,11 @@ namespace Petfinder.Models
         public Origins? Origins { get; set; }        
         public BreedType? BreedType { get; set; }
         [Required]
+        [StringLength(32,ErrorMessage = "Description must be below 32 characters long")]
         public string Description { get; set; }
         public Size? Size { get; set; }
         public Difficulty? Difficulty { get; set; }
+        [Url(ErrorMessage = "Invalid URL")]
         public string PhotoUrl { get; set; }
 
         public int ShelterId { get; set; }
