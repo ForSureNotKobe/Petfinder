@@ -11,6 +11,7 @@ using System.Dynamic;
 using Petfinder.Models;
 using Petfinder.Helpers;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Petfinder.Controllers
 {
