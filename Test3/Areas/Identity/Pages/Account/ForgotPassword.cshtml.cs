@@ -32,7 +32,7 @@ namespace Petfinder.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Invalid e-mail adress")]
             public string Email { get; set; }
         }
 
