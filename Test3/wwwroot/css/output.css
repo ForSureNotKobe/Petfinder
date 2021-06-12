@@ -51,7 +51,9 @@ Remove the margin in all browsers.
 body {
   margin: 0;
 }
-
+.desc-textarea {
+    min-height: 76px;
+}
 /**
 Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
 */
