@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,9 @@ namespace Petfinder.Models
         public int Nip { get; set; }
 
         public List<Pet> Pets { get; set; }
-        public List<User> Users { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public User User { get; set; }
 
         public IEnumerable<Shelter> Shelters { get; set; }
     }

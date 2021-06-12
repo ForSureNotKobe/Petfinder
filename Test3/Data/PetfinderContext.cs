@@ -22,6 +22,10 @@ namespace Petfinder.Models
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Shelter)
+                .WithOne(s => s.User);            
+
             modelBuilder.Entity<Pet>()
                 .HasOne(p => p.Shelter)
                 .WithMany(s => s.Pets);
@@ -39,7 +43,6 @@ namespace Petfinder.Models
 
             modelBuilder.Entity<User>()
                 .HasOne(c => c.Clinic);
-
 
             modelBuilder.Entity<Clinic>()
                 .HasMany(r => r.Ratings);

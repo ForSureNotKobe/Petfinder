@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +16,10 @@ namespace Petfinder.Models
         public int Nip { get; set; }
 
         public List<Rating> Ratings { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("User")]
+        public string UserId { get; set; }
         public User User { get; set; }
     }
 }

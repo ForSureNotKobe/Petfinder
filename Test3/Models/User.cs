@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace Petfinder.Models
 
         public int? ShelterId { get; set; }
         public Shelter Shelter { get; set; }
+        [ForeignKey("Shelter")]
         public int? ClinicId { get; set; }
         public Clinic Clinic { get; set; }
     }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Petfinder.Helpers;
 using Petfinder.Models;
 
 namespace Petfinder.Controllers
@@ -18,12 +20,14 @@ namespace Petfinder.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Shelters
         public async Task<IActionResult> Index()
         {
             return View(await _context.Shelters.ToListAsync());
         }
 
+        [AllowAnonymous]
         // GET: Shelters/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,6 +49,14 @@ namespace Petfinder.Controllers
         // GET: Shelters/Create
         public IActionResult Create()
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
+            if (currentUser.ShelterId != null)
+            {
+                //POPUP ==> SHELTER ALREADY REGISTERED
+                return (RedirectToAction("Index"));
+            }
+
             return View();
         }
 
@@ -53,14 +65,26 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,PhoneNumber,Address,Nip")] Shelter shelter)
+        public async Task<IActionResult> Create([Bind("ShelterId,Name,Email,PhoneNumber,Address,Nip")] Shelter shelter)
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
+            shelter.User = currentUser;
+            shelter.UserId = currentUser.Id;
+
             if (ModelState.IsValid)
             {
                 _context.Add(shelter);
+
+                await _context.SaveChangesAsync();
+
+                currentUser.Shelter = shelter;
+                _context.Update(currentUser);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(shelter);
         }
 
@@ -73,10 +97,17 @@ namespace Petfinder.Controllers
             }
 
             var shelter = await _context.Shelters.FindAsync(id);
+                        
             if (shelter == null)
             {
                 return NotFound();
             }
+
+            if (UserHelper.GetCurrentUser(HttpContext, _context).Shelter != shelter)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(shelter);
         }
 
@@ -85,18 +116,28 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,PhoneNumber,Address,Nip")] Shelter shelter)
+        public async Task<IActionResult> Edit(int id, [Bind("ShelterId,Name,Email,PhoneNumber,Address,Nip")] Shelter shelter)
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
             if (id != shelter.ShelterId)
             {
                 return NotFound();
+            }
+
+            if (currentUser.ShelterId != shelter.ShelterId)
+            {
+                return RedirectToAction(nameof(Index));
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    shelter.UserId = currentUser.Id;
                     _context.Update(shelter);
+                    currentUser.Shelter = shelter;
+                    _context.Update(currentUser);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -118,6 +159,8 @@ namespace Petfinder.Controllers
         // GET: Shelters/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
             if (id == null)
             {
                 return NotFound();
@@ -130,6 +173,11 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
+            if (shelter.UserId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(shelter);
         }
 
@@ -139,6 +187,13 @@ namespace Petfinder.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var shelter = await _context.Shelters.FindAsync(id);
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
+            if (currentUser.ShelterId != shelter.ShelterId)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             _context.Shelters.Remove(shelter);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

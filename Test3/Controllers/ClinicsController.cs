@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Petfinder.Helpers;
 using Petfinder.Models;
 
 namespace Petfinder.Controllers
@@ -13,18 +17,21 @@ namespace Petfinder.Controllers
     public class ClinicsController : Controller
     {
         private readonly PetfinderContext _context;
+        private readonly UserManager<User> _userManager;
 
         public ClinicsController(PetfinderContext context)
         {
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Clinics
         public async Task<IActionResult> Index()
         {
             return View(await _context.Clinics.ToListAsync());
         }
 
+        [AllowAnonymous]
         // GET: Clinics/Details/5
         public IActionResult Details(int? id)
         {
@@ -48,7 +55,13 @@ namespace Petfinder.Controllers
         // GET: Clinics/Create
         public IActionResult Create()
         {
-            ViewData["Name"] = new SelectList(_context.Clinics, "Name", "Name");
+            var currentUser = UserHelper.GetCurrentUser(HttpContext,_context);
+
+            if (currentUser.ClinicId != null)
+            {
+                return(RedirectToAction("Index"));
+            }            
+
             return View();
         }
 
@@ -59,12 +72,23 @@ namespace Petfinder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Email,PhoneNumber,Address,Nip")] Clinic clinic)
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
+            clinic.User = currentUser;
+            clinic.UserId = currentUser.Id;
+
             if (ModelState.IsValid)
             {
                 _context.Add(clinic);
                 await _context.SaveChangesAsync();
+
+                currentUser.Clinic = clinic;
+                _context.Update(currentUser);
+
                 return RedirectToAction(nameof(Index));
             }
+            currentUser.ClinicId = _context.Clinics.Last().ClinicId;
+
             return View(clinic);
         }
 
@@ -81,6 +105,12 @@ namespace Petfinder.Controllers
             {
                 return NotFound();
             }
+
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+            if (clinic.UserId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View(clinic);
         }
 
@@ -94,6 +124,12 @@ namespace Petfinder.Controllers
             if (id != clinic.ClinicId)
             {
                 return NotFound();
+            }
+
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+            if (clinic.UserId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Index));
             }
 
             if (ModelState.IsValid)
@@ -134,6 +170,12 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+            if (clinic.UserId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(clinic);
         }
 
@@ -141,8 +183,15 @@ namespace Petfinder.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
-        {
+        { 
             var clinic = await _context.Clinics.FindAsync(id);
+
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+            if (clinic.UserId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             _context.Clinics.Remove(clinic);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

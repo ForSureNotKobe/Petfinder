@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Dynamic;
 using Petfinder.Models;
+using Petfinder.Helpers;
 
 namespace Petfinder.Controllers
 {
@@ -18,10 +19,10 @@ namespace Petfinder.Controllers
 
         public PetsController(PetfinderContext context)
         {
-            _context = context;            
+            _context = context;
         }
 
-
+        [AllowAnonymous]
         // GET: Pets
         public IActionResult Index(string searchString)
         {
@@ -32,14 +33,16 @@ namespace Petfinder.Controllers
             };
             ViewData["Name"] = new SelectList(_context.Shelters, "Name", "Name");
 
-            if(!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString))
             {
                 petViewModel.Pets = petViewModel.Pets.Where(p => p.Name.Contains(searchString)).ToList();
             }
 
             return View(petViewModel);
-            
+
         }
+
+        [AllowAnonymous]
         // GET: Pets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -63,8 +66,14 @@ namespace Petfinder.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            ViewData["Name"] = new SelectList(_context.Shelters, "Name", "Name");
-            return View();
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
+            if (currentUser.ShelterId != null)
+            {
+                return View();
+            }
+            else
+                return RedirectToAction(nameof(Index));
         }
 
         // POST: Pets/Create
@@ -74,20 +83,32 @@ namespace Petfinder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PetId,Name,Age,Sex,Origins,Type,Description,Size,Difficulty,PhotoUrl,ShelterId")] Pet pet)
         {
-            if (ModelState.IsValid)
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+            if (currentUser.ShelterId != null)
             {
-                _context.Add(pet);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(pet);
+                    await _context.SaveChangesAsync();
+
+                    _context.Shelters.FirstOrDefault(s => s.ShelterId == currentUser.ShelterId).Pets.Add(pet);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId", pet.ShelterId);
+                return View(pet);
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId", pet.ShelterId);
-            return View(pet);
+            else
+                return RedirectToAction(nameof(Index));
         }
 
         // GET: Pets/Edit/5
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
             if (id == null)
             {
                 return NotFound();
@@ -98,6 +119,12 @@ namespace Petfinder.Controllers
             {
                 return NotFound();
             }
+
+            if (currentUser.ShelterId != pet.ShelterId)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", pet.ShelterId);
             return View(pet);
         }
@@ -156,6 +183,11 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
+            if (currentUser.ShelterId != pet.ShelterId)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(pet);
         }
 
@@ -176,6 +208,7 @@ namespace Petfinder.Controllers
             return _context.Pets.Any(e => e.PetId == id);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Index(IFormCollection formCollection)
         {
@@ -192,7 +225,7 @@ namespace Petfinder.Controllers
             Size sizeFilter = (Size)Convert.ToInt32(formCollection["Size"]);
             Difficulty difficultyFilter = (Difficulty)Convert.ToInt32(formCollection["Difficulty"]);
             string orderFilter = formCollection["SortParams"];
-           // Shelter shelterFilter = formCollection["Difficulty"];
+            // Shelter shelterFilter = formCollection["Difficulty"];
 
             ViewData["Name"] = new SelectList(petViewModel.Shelters, "Name", "Name");
 

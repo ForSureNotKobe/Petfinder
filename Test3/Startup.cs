@@ -50,13 +50,15 @@ namespace Petfinder
 
             services.AddControllersWithViews();
 
-            //services.AddAuthorization(options =>
-            //{
-            //    // TBA: Which sites require auth
-            //    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-            //        .RequireAuthenticatedUser()
-            //        .Build();
-            //});
+            services.AddAuthorization(options =>
+            {
+                // TBA: Which sites require auth
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
+
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

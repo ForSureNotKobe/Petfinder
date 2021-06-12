@@ -45,7 +45,7 @@ namespace Petfinder.Controllers
         // GET: Ratings/Create
         public IActionResult Create()
         {
-            ViewData["ClinicId"] = new SelectList(_context.Clinics, "ClinicId", "ClinicId");
+            ViewData["ClinicId"] = new SelectList(_context.Clinics, "ClinicId", "Name");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace Petfinder.Controllers
         public async Task<IActionResult> Create([Bind("RatingId,Content,Opinion,ClinicId")] Rating rating)
         {
             
-            ViewData["ClinicId"] = new SelectList(_context.Clinics, "ClinicId", "ClinicId");
+            ViewData["ClinicId"] = new SelectList(_context.Clinics, "ClinicId", "Name");
             if (ModelState.IsValid)
             {
                 _context.Add(rating);

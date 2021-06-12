@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Petfinder.Helpers;
 using Petfinder.Models;
 
 namespace Petfinder.Controllers
@@ -85,14 +86,21 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PostId,Type,Title,Description,PhotoUrl,UserId")] Post post)
+        public async Task<IActionResult> Create([Bind("PostId,Type,Title,Description,PhotoUrl")] Post post)
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext,_context);
+
+            post.User = currentUser;
+            post.UserId = currentUser.Id;
+
             if (ModelState.IsValid)
             {
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            currentUser.Posts.Add(_context.Posts.Last());
+
             return View(post);
         }
 
@@ -109,6 +117,13 @@ namespace Petfinder.Controllers
             {
                 return NotFound();
             }
+
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+            if (post.UserId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(post);
         }
 
@@ -122,6 +137,12 @@ namespace Petfinder.Controllers
             if (id != post.PostId)
             {
                 return NotFound();
+            }
+
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+            if (post.UserId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Index));
             }
 
             if (ModelState.IsValid)
@@ -162,6 +183,12 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+            if (post.UserId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(post);
         }
 
@@ -171,6 +198,13 @@ namespace Petfinder.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var post = await _context.Posts.FindAsync(id);
+
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+            if (post.UserId != currentUser.Id)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             _context.Posts.Remove(post);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
