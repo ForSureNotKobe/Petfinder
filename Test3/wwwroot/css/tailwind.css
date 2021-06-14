@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .min-h-screen-75 {
+        min-height: 75vh;
+    }
+}
+
 @layer components {
     .tile-background-color {
         @apply bg-white;
