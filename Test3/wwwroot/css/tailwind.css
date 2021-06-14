@@ -86,6 +86,14 @@
     @apply btn bg-blue-500 hover:bg-blue-700;
 }
 
+.nav-link {
+    @apply ml-10 py-2 text-white font-bold cursor-pointer;
+}
+
+.lg-nav-link {
+    @apply py-2 p-2 rounded-lg text-white font-bold cursor-pointer;
+}
+
 
 
 

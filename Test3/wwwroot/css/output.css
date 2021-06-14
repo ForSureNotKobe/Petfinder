@@ -51,9 +51,7 @@ Remove the margin in all browsers.
 body {
   margin: 0;
 }
-.desc-textarea {
-    min-height: 76px;
-}
+
 /**
 Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
 */
@@ -31861,11 +31859,10 @@ video {
   --tw-backdrop-sepia: sepia(100%);
 }
 
-.tile-background-animated {
+.tile-background {
   --tw-bg-opacity: 1;
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
   border-radius: 0.5rem;
-  cursor: pointer;
   --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   --tw-translate-x: 0;
@@ -31878,13 +31875,13 @@ video {
   transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.tile-background-animated:hover {
+.tile-background:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
   --tw-translate-y: -0.25rem;
 }
 
-.tile-background-animated {
+.tile-background {
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -31892,21 +31889,6 @@ video {
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
-}
-
-@media (min-width: 1024px) {
-  .tile-background-animated {
-    max-width: 28rem;
-  }
-}
-
-.tile-background {
-  --tw-bg-opacity: 1;
-  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
-  border-radius: 0.5rem;
-  cursor: pointer;
-  --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 @media (min-width: 1024px) {
@@ -32026,17 +32008,6 @@ video {
   }
 }
 
-.medium-tiles-flex {
-  display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 1024px) {
-  .medium-tiles-flex {
-    width: 33.333333%;
-  }
-}
-
 .big-tile-description {
   --tw-bg-opacity: 1;
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -32115,6 +32086,27 @@ video {
 .btn-blue:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(29, 78, 216, var(--tw-bg-opacity));
+}
+
+.nav-link {
+  cursor: pointer;
+  font-weight: 700;
+  margin-left: 2.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+.lg-nav-link {
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {
@@ -187671,7 +187663,6 @@ video {
     --tw-backdrop-sepia: sepia(100%);
   }
 }
-
 
 
 

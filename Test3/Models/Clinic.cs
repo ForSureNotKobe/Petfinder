@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.ComponentModel.DataAnnotations.Schema;
-=======
 using System.ComponentModel.DataAnnotations;
->>>>>>> origin/spdev1206
 using System.Linq;
 using System.Threading.Tasks;
 
