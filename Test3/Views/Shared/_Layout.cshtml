@@ -7,9 +7,8 @@
     
     <link rel="stylesheet" href="~/css/output.css" />
     <link rel="stylesheet" href="~/css/lightbox.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body class="bg-gray-200 flex flex-col">
     <header>
         <nav>
             <div class="hidden lg:block ">
@@ -118,21 +117,19 @@
             </div>
         </nav>
     </header>
-    <div class="page-container bg-gray-200">
-        <div class="content-container">
-            <main role="main">
-                @RenderBody()
-            </main>
-        </div>
-        <div class="add-container">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Ce3cES-Y80RD4Woq2YzwXErhHffvgD2_esqmjz39L1bXxXu9m7aHyE-UFWr9hxxFIBU&usqp=CAU" alt="ad-image">
-        </div>
+    <div class="px-20 lg:px-40 mb-5">
+        <partial name="_AdLayout" />
     </div>
-
-    <footer class="footer text-muted">
-        <div class="container">
-            &copy; 2021 - Petfinder - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <div class="flex-grow min-h-screen-75">
+       <main role="main">
+           @RenderBody()
+       </main>
+    </div>
+    <div class="px-20 lg:px-40 mb-5">
+        <partial name="_AdLayout" />
+    </div>
+    <footer class="bg-green-500 w-screen p-4 text-white font-bold">
+        &copy; 2021 - Petfinder - <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -10,56 +10,90 @@
     <title>Index</title>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nip)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nip)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ShelterId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ShelterId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ShelterId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+    <div class="max-w-md sm:max-w-xl lg:max-w-6xl mx-auto px-8 lg:px-12 py-8 bg-gray-200">
+        <button onclick="location.href='/Shelters/Create';" class="btn-blue">Create New</button>
+        <div class="mt-6 grid gap-6 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+
+            @foreach (var item in Model)
+            {
+                <div class="medium-tile">
+                    <p onclick="location.href='/Shelters/Details/@item.ShelterId';" class="text-center text-2xl pb-2 hover:underline cursor-pointer">@Html.DisplayFor(modelItem => item.Name)</p>
+                    <div class="shelter-tile-flex">
+                        <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20S3 10.87 3 7a7 7 0 1 1 14 0c0 3.87-7 13-7 13zm0-11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" /></svg>
+                        <div class="flex flex-col shelter-tile-text">
+                            <p>@Html.DisplayFor(modelItem => item.Address)</p>
+                        </div>
+                    </div>
+                    <div class="ml-6 border-bar"></div>
+                    <div class="shelter-tile-flex">
+                        <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 18.35V19a1 1 0 0 1-1 1h-2A17 17 0 0 1 0 3V1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4c0 .56-.31 1.31-.7 1.7L3.16 8.84c1.52 3.6 4.4 6.48 8 8l2.12-2.12c.4-.4 1.15-.71 1.7-.71H19a1 1 0 0 1 .99 1v3.35z" /></svg>
+                        <div class="shelter-tile-text">@Html.DisplayFor(modelItem => item.PhoneNumber)</div>
+                    </div>
+                    <div class="shelter-tile-flex">
+                        <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13.6 13.47A4.99 4.99 0 0 1 5 10a5 5 0 0 1 8-4V5h2v6.5a1.5 1.5 0 0 0 3 0V10a8 8 0 1 0-4.42 7.16l.9 1.79A10 10 0 1 1 20 10h-.18.17v1.5a3.5 3.5 0 0 1-6.4 1.97zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" /></svg>
+                        <div class="shelter-tile-text">@Html.DisplayFor(modelItem => item.Email)</div>
+                    </div>
+                    <div class="shelter-tile-flex pt-4">
+                        <button onclick="location.href='/Shelters/Edit/@item.ShelterId';" class="btn-blue mx-4">Edit</button>
+                        <button onclick="location.href='/Shelters/Delete/@item.ShelterId';" class="btn-red float-rigth mx-4">Delete</button>
+                    </div>
+                </div>
+            }
+            </div>
+    </div>
+
+    @*<p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nip)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nip)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ShelterId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ShelterId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ShelterId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
 </body>
 </html>
