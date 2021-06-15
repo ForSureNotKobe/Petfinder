@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Petfinder.Models;
 
 namespace Petfinder.Migrations
 {
     [DbContext(typeof(PetfinderContext))]
-    partial class PetfinderContextModelSnapshot : ModelSnapshot
+    [Migration("20210615180617_RatingFix")]
+    partial class RatingFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -13,14 +13,15 @@ namespace Petfinder.Models
     public class Rating
     {
         public int RatingId { get; set; }
+        [Required]
+        [StringLength(200, ErrorMessage = "Description must be below 32 characters long")]
         public string Content { get; set; }
         [Required]
-        [StringLength(20, ErrorMessage = "Description must be below 32 characters long")]
-        public Opinion? Opinion { get; set; }
-        [Required]
+        public Opinion? Opinion { get; set; }        
         public Clinic Clinic { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
+        [Required]
         public int ClinicId { get; set; }
     }
 }
