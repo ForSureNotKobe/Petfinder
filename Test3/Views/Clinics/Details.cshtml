@@ -52,27 +52,7 @@
             </div>
         </div>
     </div>
-
-
-    <p class="m-auto text-gray-600 text-2xl text-center">Vet:</p>
-    <div>
-        <div>
-            <h4>Clinic</h4>
-            <hr />
-            <dl class="row">
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Clinic.Name)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Clinic.Name)
-                </dd>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Clinic.User.Id)
-                </dd>
-            </dl>
-        </div>
-    </div>
-    <!--Tu wstawić detail view-->
+   
     <div>
         @using (Html.BeginForm("Details", "Clinics", FormMethod.Get))
         {
