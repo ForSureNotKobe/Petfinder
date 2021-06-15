@@ -7,80 +7,132 @@
     
     <link rel="stylesheet" href="~/css/output.css" />
     <link rel="stylesheet" href="~/css/lightbox.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body class="bg-gray-200 flex flex-col">
     <header>
-        <nav class="justify-end flex-wrap bg-green-500 py-3 px-12 rounded-b-lg">            
-            <div class="flex items-center">
-                <a class="py-2 p-2 rounded-lg text-white font-bold" href="/">
-                    Home
-                </a>
-                <div class="pt-2 relative mx-auto text-gray-600">
-                    <form asp-controller="Pets" asp-action="Index" method="get">
-                        <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                               type="search" name="searchString" placeholder="Search">
-                        <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
-                            <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
-                                 viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
-                                 width="512px" height="512px">
-                            <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                             </svg>
-                        </button>
-                    </form>
+        <nav>
+            <div class="hidden lg:block ">
+                <div class="flex items-center justify-end flex-wrap bg-green-500 py-3 px-12 rounded-b-lg">
+                    <a class=" rounded-lg text-white font-bold" href="/">
+                        <svg class="w-10 h-9 fill-current text-white align-middle" viewBox="0 0 48.842632 49.726089" version="1.1" id="svg5" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs2" /> <g id="layer1" transform="translate(-38.998384,-48.716431)"> <ellipse id="path284" cx="71.666168" cy="81.909225" rx="16.174849" ry="16.533295" /> <ellipse id="path286" cx="66.96328" cy="55.153057" rx="6.2970791" ry="6.4366264" /> <ellipse id="path286-2" cx="50.51413" cy="65.880768" rx="6.2970791" ry="6.4366264" /> <ellipse id="path286-3" cx="45.295464" cy="83.297523" rx="6.2970791" ry="6.4366264" /> </g> </svg>
+                    </a>
+                    <div class="pt-2 relative mx-auto text-gray-600">
+                        <form asp-controller="Pets" asp-action="Index" method="get">
+                            <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                                   type="search" name="searchString" placeholder="Search">
+                            <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                                <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                                     viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                                     width="512px" height="512px">
+                                <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />                         </svg>
+                            </button>
+                        </form>
+                    </div>
+                    <a class="lg-nav-link" href="/Posts">
+                        Posts
+                    </a>
+                    <a class="lg-nav-link" href="/Shelters">
+                        Shelters
+                    </a>
+                    <a class="lg-nav-link" href="/Clinics">
+                        Vets
+                    </a>
+                    <a class="lg-nav-link" href="/Pets">
+                        Pets
+                    </a>
+                    @{if (!Context.User.Identity.IsAuthenticated)
+                        {
+                            <a class="lg-nav-link" href="/identity/account/login">
+                                Log in
+                            </a>
+                            <a class="lg-nav-link" href="/identity/account/register">
+                                Sign Up
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="lg-nav-link" href="/identity/account/logout">
+                                Log out
+                            </a>
+                        }
+                    }
+
                 </div>
-                <a class="py-2 p-2 rounded-lg text-white font-bold" href="/Posts">
-                    Posts
-                </a>
-                <a class="py-2 p-2 rounded-lg text-white font-bold" href="/Shelters">
-                    Shelters
-                </a>
-                <a class="py-2 p-2 rounded-lg text-white font-bold" href="/Clinics">
-                    Vets
-                </a>
-                <a class="py-2 p-2 rounded-lg text-white font-bold" href="/Pets">
-                    Pets
-                </a>
-                @{if (!Context.User.Identity.IsAuthenticated)
-                    {
-                        <a class="py-2 p-2 rounded-lg text-white font-bold" href="/identity/account/login">
-                            Log in
+            </div>
+            <div class="lg:hidden">
+                <div class="flex flex-col text-white bg-green-500 py-1">
+                    <div class="px-6 py-2">
+                        <a class="cursor-pointer" href="/">
+                            <svg class="float-left w-10 h-9 fill-current text-white align-middle" viewBox="0 0 48.842632 49.726089" version="1.1" id="svg5" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs2" /> <g id="layer1" transform="translate(-38.998384,-48.716431)"> <ellipse id="path284" cx="71.666168" cy="81.909225" rx="16.174849" ry="16.533295" /> <ellipse id="path286" cx="66.96328" cy="55.153057" rx="6.2970791" ry="6.4366264" /> <ellipse id="path286-2" cx="50.51413" cy="65.880768" rx="6.2970791" ry="6.4366264" /> <ellipse id="path286-3" cx="45.295464" cy="83.297523" rx="6.2970791" ry="6.4366264" /> </g> </svg>
                         </a>
-                        <a class="py-2 p-2 rounded-lg text-white font-bold" href="/identity/account/register">
-                            Sign Up
+                        <a class="cursor-pointer" href="javascript:void(0);" onclick="hamburgerMenu()">
+                            <svg class="w-7 h-9 fill-current text-white float-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
                         </a>
-                    }
-                    else
-                    {
-                        <a class="py-2 p-2 rounded-lg text-white font-bold" href="/identity/account/logout">
-                            Log out
-                        </a>
-
-                    }
-                }
-
+                    </div>
+                    <div id="hamburgerLinks" class="hidden  h-screen">
+                        <div class="py-4 bg-green-400 w-full">
+                            <div class="flex flex-col">
+                                <a class="nav-link" href="/Posts">
+                                    Posts
+                                </a>
+                                <a class="nav-link" href="/Shelters">
+                                    Shelters
+                                </a>
+                                <a class="nav-link" href="/Clinics">
+                                    Vets
+                                </a>
+                                <a class="nav-link" href="/Pets">
+                                    Pets
+                                </a>
+                            </div>
+                            <form class=" m-auto px-3 py-5 flex flex-row">
+                                <input class="flex-1 border-2 text-black border-gray-300 bg-white h-10 w-screen pl-2 rounded-l-lg text-sm focus:outline-none"
+                                       type="search" name="searchString" placeholder="Search">
+                                <button type="submit" class="border-t-2 border-b-2 border-r-2 border-gray-300 flex py-2 px-3 bg-gray-100 rounded-r-xl">
+                                    <svg class=" pt-1 w-5 h-5 fill-current text-gray-600 text-center align-middle " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" /></svg>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="bg-green-500 flex flex-col">
+                            @{if (!Context.User.Identity.IsAuthenticated)
+                                {
+                                    <a class="nav-link" href="/identity/account/login">
+                                        Log in
+                                    </a>
+                                    <a class="nav-link" href="/identity/account/register">
+                                        Sign Up
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" href="/identity/account/logout">
+                                        Log out
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
-    <div class="page-container bg-gray-200">
-        <div class="content-container">
-            <main role="main">
-                @RenderBody()
-            </main>
-        </div>
-        <div class="add-container">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Ce3cES-Y80RD4Woq2YzwXErhHffvgD2_esqmjz39L1bXxXu9m7aHyE-UFWr9hxxFIBU&usqp=CAU" alt="ad-image">
-        </div>
+    <div class="px-20 lg:px-40 mb-5">
+        <partial name="_AdLayout" />
     </div>
-
-    <footer class="footer text-muted">
-        <div class="container">
-            &copy; 2021 - Petfinder - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <div class="flex-grow min-h-screen-75">
+       <main role="main">
+           @RenderBody()
+       </main>
+    </div>
+    <div class="px-20 lg:px-40 mb-5">
+        <partial name="_AdLayout" />
+    </div>
+    <footer class="bg-green-500 w-screen p-4 text-white font-bold">
+        &copy; 2021 - Petfinder - <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/lightbox.min.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)

@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .min-h-screen-75 {
+        min-height: 75vh;
+    }
+}
+
 @layer components {
     .tile-background-color {
         @apply bg-white;
@@ -84,6 +90,14 @@
 
 .btn-blue {
     @apply btn bg-blue-500 hover:bg-blue-700;
+}
+
+.nav-link {
+    @apply ml-10 py-2 text-white font-bold cursor-pointer;
+}
+
+.lg-nav-link {
+    @apply py-2 p-2 rounded-lg text-white font-bold cursor-pointer;
 }
 
 
