@@ -196,6 +196,8 @@ namespace Petfinder.Controllers
             }
 
             _context.Shelters.Remove(shelter);
+            currentUser.ShelterId = null;
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
