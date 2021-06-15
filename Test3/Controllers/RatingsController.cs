@@ -57,10 +57,11 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RatingId,Content,Opinion,ClinicId")] Rating rating)
+        public async Task<IActionResult> Create([Bind("RatingId,Opinion,Content,ClinicId")] Rating rating)
         {
             
             ViewData["ClinicId"] = new SelectList(_context.Clinics, "ClinicId", "Name");
+            rating.Clinic = _context.Clinics.First(c => c.ClinicId == rating.ClinicId);
             if (ModelState.IsValid)
             {
                 _context.Add(rating);
