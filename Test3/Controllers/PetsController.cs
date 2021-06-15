@@ -35,7 +35,7 @@ namespace Petfinder.Controllers
                 Pets = _context.Pets,
                 Shelters = _context.Shelters
             };
-            ViewData["Name"] = new SelectList(_context.Shelters, "Name", "Name");
+            ViewData["Name"] = new SelectList(_context.Shelters, "ShelterId", "Name");
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -222,15 +222,17 @@ namespace Petfinder.Controllers
                 Shelters = _context.Shelters
             };
 
+            ViewData["Name"] = new SelectList(petViewModel.Shelters, "ShelterId", "Name");
+
             Sex sexFilter = (Sex)Convert.ToInt32(formCollection["Sex"]);
             Origins originsFilter = (Origins)Convert.ToInt32(formCollection["Origins"]);
             BreedType breedTypeFilter = (BreedType)Convert.ToInt32(formCollection["BreedType"]);
             Size sizeFilter = (Size)Convert.ToInt32(formCollection["Size"]);
             Difficulty difficultyFilter = (Difficulty)Convert.ToInt32(formCollection["Difficulty"]);
             string orderFilter = formCollection["SortParams"];
-            // Shelter shelterFilter = formCollection["Difficulty"];
+            int shelterFilter = Convert.ToInt32(formCollection["Shelter"]);
 
-            ViewData["Name"] = new SelectList(petViewModel.Shelters, "Name", "Name");
+            
 
             petViewModel.Pets = petViewModel.Pets
                 .Where(p =>
@@ -238,7 +240,8 @@ namespace Petfinder.Controllers
                 (p.Origins.Equals(originsFilter) || Convert.ToInt32(formCollection["Origins"]).Equals(9)) &&
                 (p.BreedType.Equals(breedTypeFilter) || Convert.ToInt32(formCollection["BreedType"]).Equals(9)) &&
                 (p.Size.Equals(sizeFilter) || Convert.ToInt32(formCollection["Size"]).Equals(9)) &&
-                (p.Difficulty.Equals(difficultyFilter) || Convert.ToInt32(formCollection["Difficulty"]).Equals(9)))
+                (p.Difficulty.Equals(difficultyFilter) || Convert.ToInt32(formCollection["Difficulty"]).Equals(9)) &&
+                (p.ShelterId.Equals(shelterFilter) || shelterFilter == 0))
                 .ToList();
 
             switch (orderFilter)
