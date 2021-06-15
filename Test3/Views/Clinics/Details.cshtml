@@ -39,6 +39,7 @@
         <div class="medium-tiles-flex">
             <div class="medium-tile">
                 <div class="p-2 mx-auto w-max">
+                    <button onclick="location.href='/Clinics/Edit/@Model.Clinic.ClinicId';" class="btn-green mx-2">Edit</button>
                     <button onclick="location.href='/Ratings/Create';" class="btn-green mx-2">Add new rating</button>
                     <button onclick="location.href='/Shelters/Index/';" class="btn-blue mx-2">Back to List</button>
                 </div>
@@ -57,11 +58,11 @@
 
                                 @foreach (var rating in Model.Ratings)
                                 {
-                                    <div onclick="location.href='/Ratings/Details/@rating.RatingId';" class="tile-background-animated">
+                                    <div onclick="location.href='/Ratings/Details/@rating.RatingId';" class="tile-background">
                                         <div>
                                             <p style="background-color: #e6e6e6" class="m-auto text-gray-600 text-2xl text-center">@rating.Opinion</p>
                                         </div>
-                                        <h2 class="tile-pet-name">@rating.Content</h2>
+                                        <p class="tile-pet-name font-size: 0.9rem">@rating.Content</p>
                                         <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
                                     </div>
                                 }

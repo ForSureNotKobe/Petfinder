@@ -89,12 +89,16 @@
                                         <label asp-for="PhotoUrl" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" for="grid-password"></label>
                                         <input asp-for="PhotoUrl" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Photo url" />
                                         <span asp-validation-for="PhotoUrl" class="text-danger"></span>
-                                    </div>                                  
+                                    </div>
                                     <div class="relative w-full mb-3">
                                         <input type="submit" value="Save changes" class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                                                style="transition: all 0.15s ease 0s;" />
                                     </div>
                                 </form>
+
+                                <div>
+                                    <button onclick="location.href='/Pets/Delete/@Model.PetId';" class="btn-red mx-4">Delete Pet</button>
+                                </div>
                             </div>
                         </div>
                     </div>
