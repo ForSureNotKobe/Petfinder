@@ -135,7 +135,7 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PostId,Type,Title,Description,PhotoUrl,UserId")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("PostId,Type,Title,Description,PhotoUrl")] Post post)
         {
             if (id != post.PostId)
             {
@@ -143,15 +143,12 @@ namespace Petfinder.Controllers
             }
 
             var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
-            if (post.UserId != currentUser.Id)
-            {
-                return RedirectToAction(nameof(Index));
-            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    post.UserId = currentUser.Id;
                     _context.Update(post);
                     await _context.SaveChangesAsync();
                 }
