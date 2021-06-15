@@ -64,9 +64,9 @@ namespace Petfinder.Controllers
             {
                 _context.Add(rating);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Clinics", new { id = rating.ClinicId });
             }
-            return View(rating);
+            return View();
         }
 
         // GET: Ratings/Edit/5

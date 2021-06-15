@@ -192,6 +192,13 @@ namespace Petfinder.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            var petsToDelete = _context.Pets.Where(p => p.ShelterId == shelter.ShelterId).ToList();
+
+            foreach (Pet pet in petsToDelete)
+            {
+                _context.Pets.Remove(pet);
+            }
+
             _context.Shelters.Remove(shelter);
             currentUser.ShelterId = null;
 

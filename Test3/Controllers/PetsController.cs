@@ -76,7 +76,8 @@ namespace Petfinder.Controllers
                 return View();
             }
             else
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Shelters");
+
         }
 
         // POST: Pets/Create

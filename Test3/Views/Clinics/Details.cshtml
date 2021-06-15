@@ -49,37 +49,27 @@
             </div>
             <div class="medium-tile">
                 <p class="text-center text-2xl pb-2">Ratings for this vet</p>
-            </div>
-        </div>
-    </div>
-   
-    <div>
-        @using (Html.BeginForm("Details", "Clinics", FormMethod.Get))
-        {
-            <div class="max-w-md sm:max-w-xl lg:max-w-6xl mx-auto px-8 lg:px-12 py-8">
-                <p class="m-auto text-gray-600 text-2xl text-center">Ratings for this vet</p>
-                <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-
-                    @foreach (var rating in Model.Ratings)
+                <div>
+                    @using (Html.BeginForm("Details", "Clinics", FormMethod.Get))
                     {
-                        <div onclick="location.href='/Ratings/Details/@rating.RatingId';" class="tile-background-animated">
-                            <div>
-                                <p style="background-color: #e6e6e6" class="m-auto text-gray-600 text-2xl text-center">@rating.Opinion</p>
+                        <div class="max-w-md sm:max-w-xl lg:max-w-6xl mx-auto px-8 lg:px-12 py-8">
+                            <div class="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+                                @foreach (var rating in Model.Ratings)
+                                {
+                                    <div onclick="location.href='/Ratings/Details/@rating.RatingId';" class="tile-background-animated">
+                                        <div>
+                                            <p style="background-color: #e6e6e6" class="m-auto text-gray-600 text-2xl text-center">@rating.Opinion</p>
+                                        </div>
+                                        <h2 class="tile-pet-name">@rating.Content</h2>
+                                        <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
+                                    </div>
+                                }
                             </div>
-                            <h2 class="tile-pet-name">@rating.Content</h2>
-                            <!-- <h2 class="tile-pet-text"> Lorem ipsum dolor sit amet, </h2> -->
                         </div>
                     }
                 </div>
             </div>
-        }
-    </div>
-    <div class="grid grid-rows-2 gap-10">
-        <div>
-            <a class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" href="/Ratings/Create">Add new rating</a>
-        </div>
-        <div>
-            <a class="bg-gray-900 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" asp-action="Index">Back to List</a>
         </div>
     </div>
 </body>

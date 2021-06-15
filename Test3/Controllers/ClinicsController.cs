@@ -56,7 +56,7 @@ namespace Petfinder.Controllers
 
             if (currentUser.ClinicId != null)
             {
-                return (RedirectToAction("Index"));
+                return RedirectToAction("Create", "Clinics");
             }
 
             return View();
