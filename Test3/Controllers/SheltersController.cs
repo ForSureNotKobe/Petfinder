@@ -79,6 +79,7 @@ namespace Petfinder.Controllers
                 await _context.SaveChangesAsync();
 
                 currentUser.Shelter = shelter;
+                currentUser.ShelterId = shelter.ShelterId;
                 _context.Update(currentUser);
 
                 await _context.SaveChangesAsync();

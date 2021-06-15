@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Petfinder.Models;
 
 namespace Petfinder.Migrations
 {
     [DbContext(typeof(PetfinderContext))]
-    partial class PetfinderContextModelSnapshot : ModelSnapshot
+    [Migration("20210612112735_Test3")]
+    partial class Test3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,8 +209,8 @@ namespace Petfinder.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
 
                     b.Property<int?>("Difficulty")
                         .HasColumnType("int");
@@ -331,15 +333,11 @@ namespace Petfinder.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ShelterId");
 
                     b.HasIndex("ShelterId1");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Shelters");
                 });
@@ -414,6 +412,10 @@ namespace Petfinder.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("ShelterId")
+                        .IsUnique()
+                        .HasFilter("[ShelterId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -520,12 +522,15 @@ namespace Petfinder.Migrations
                     b.HasOne("Petfinder.Models.Shelter", null)
                         .WithMany("Shelters")
                         .HasForeignKey("ShelterId1");
+                });
 
-                    b.HasOne("Petfinder.Models.User", "User")
-                        .WithOne("Shelter")
-                        .HasForeignKey("Petfinder.Models.Shelter", "UserId");
+            modelBuilder.Entity("Petfinder.Models.User", b =>
+                {
+                    b.HasOne("Petfinder.Models.Shelter", "Shelter")
+                        .WithOne("User")
+                        .HasForeignKey("Petfinder.Models.User", "ShelterId");
 
-                    b.Navigation("User");
+                    b.Navigation("Shelter");
                 });
 
             modelBuilder.Entity("Petfinder.Models.Clinic", b =>
@@ -538,6 +543,8 @@ namespace Petfinder.Migrations
                     b.Navigation("Pets");
 
                     b.Navigation("Shelters");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Petfinder.Models.User", b =>
@@ -547,8 +554,6 @@ namespace Petfinder.Migrations
                     b.Navigation("Posts");
 
                     b.Navigation("Ratings");
-
-                    b.Navigation("Shelter");
                 });
 #pragma warning restore 612, 618
         }

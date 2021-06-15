@@ -15,7 +15,6 @@ namespace Petfinder.Models
 
         public int? ShelterId { get; set; }
         public Shelter Shelter { get; set; }
-        [ForeignKey("Shelter")]
         public int? ClinicId { get; set; }
         public Clinic Clinic { get; set; }
     }

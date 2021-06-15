@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Petfinder.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Petfinder.Services;
 
 namespace Petfinder
 {
@@ -49,6 +51,9 @@ namespace Petfinder
             });
 
             services.AddControllersWithViews();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddAuthorization(options =>
             {

@@ -44,7 +44,7 @@ namespace Petfinder.Models
         public Origins? Origins { get; set; }        
         public BreedType? BreedType { get; set; }
         [Required]
-        [StringLength(32,ErrorMessage = "Description must be below 32 characters long")]
+        [StringLength(500,ErrorMessage = "Description must be below 32 characters long")]
         public string Description { get; set; }
         public Size? Size { get; set; }
         public Difficulty? Difficulty { get; set; }

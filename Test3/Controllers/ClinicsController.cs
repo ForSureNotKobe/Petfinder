@@ -17,7 +17,6 @@ namespace Petfinder.Controllers
     public class ClinicsController : Controller
     {
         private readonly PetfinderContext _context;
-        private readonly UserManager<User> _userManager;
 
         public ClinicsController(PetfinderContext context)
         {
@@ -73,7 +72,7 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,PhoneNumber,Address,Nip")] Clinic clinic)
+        public async Task<IActionResult> Create([Bind("ClinicId,Name,Email,PhoneNumber,Address,Nip")] Clinic clinic)
         {
             var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
 
@@ -85,12 +84,12 @@ namespace Petfinder.Controllers
                 _context.Add(clinic);
                 await _context.SaveChangesAsync();
 
-                currentUser.Clinic = clinic;
+                currentUser.ClinicId = clinic.ClinicId;
                 _context.Update(currentUser);
 
                 return RedirectToAction(nameof(Index));
             }
-            currentUser.ClinicId = _context.Clinics.Last().ClinicId;
+            currentUser.ClinicId = clinic.ClinicId;
 
             return View(clinic);
         }
@@ -124,12 +123,14 @@ namespace Petfinder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ClinicId,Name,Email,PhoneNumber,Address,Nip")] Clinic clinic)
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
+
             if (id != clinic.ClinicId)
             {
                 return NotFound();
             }
 
-            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
             if (clinic.UserId != currentUser.Id)
             {
                 return RedirectToAction(nameof(Index));

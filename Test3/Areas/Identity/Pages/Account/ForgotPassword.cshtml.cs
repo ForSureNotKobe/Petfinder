@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Petfinder.Models;
+using Petfinder.Services;
 
 namespace Petfinder.Areas.Identity.Pages.Account
 {

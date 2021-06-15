@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace Petfinder.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Posts
         public async Task<IActionResult> Index(String selectedValue)
         {
@@ -57,6 +59,7 @@ namespace Petfinder.Controllers
             }
         }
 
+        [AllowAnonymous]
         // GET: Posts/Details/5
         public async Task<IActionResult> Details(int? id)
         {

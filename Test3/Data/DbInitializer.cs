@@ -55,22 +55,22 @@ namespace Petfinder.Data
 
             var pets = new Pet[]
             {
-                    new Pet { ShelterId = 1, Name = "Azor", Age = 2, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)0, Description = "Owczarek niemiecki, dlugo-wlosy, opalany", Size = (Size?)2, Difficulty = (Difficulty?)2 },
-                    new Pet { ShelterId = 2, Name = "Czesio", Age = 1, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)2, Description = "Chomik, jasna siersc, mlody", Size = (Size?)0, Difficulty = 0 },
-                    new Pet { ShelterId = 2, Name = "Oskar", Age = 5, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)0, Description = "York, bialy", Size = (Size?)0, Difficulty = (Difficulty?)1 },
-                    new Pet { ShelterId = 2, Name = "Ella", Age = 3, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)1, Description = "Kot, Rudy", Size = (Size?)1, Difficulty = 0 },
-                    new Pet { ShelterId = 2, Name = "Bobek", Age = 4, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)2, Description = "Maly zolwik", Size = (Size?)0, Difficulty = 0 },
-                    new Pet { ShelterId = 2, Name = "Aria", Age = 1, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)1, Description = "Kot perski, zloty", Size = (Size?)0, Difficulty = (Difficulty?)2 },
-                    new Pet { ShelterId = 2, Name = "Kiel", Age = 8, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)0, Description = "Golden red river, ciemny wlos", Size = (Size?)2, Difficulty = (Difficulty?)1 },
-                    new Pet { ShelterId = 2, Name = "Cymek", Age = 6, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)1, Description = "Kot, czarna karnacja", Size = 0, Difficulty = (Difficulty?)1 },
-                    new Pet { ShelterId = 1, Name = "Mati", Age = 3, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)0, Description = "Jamnik, ciemna siersc", Size = 0, Difficulty = (Difficulty?)1 },
-                    new Pet { ShelterId = 1, Name = "Alex", Age = 1, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)2, Description = "Chomik, brazowy", Size = 0, Difficulty = 0 },
-                    new Pet { ShelterId = 1, Name = "Oli", Age = 0, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)2, Description = "Mysz domowa, szara", Size = 0, Difficulty = 0 },
-                    new Pet { ShelterId = 1, Name = "Benia", Age = 1, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)2, Description = "Wiewiorka czarna", Size = 0, Difficulty = (Difficulty?)2 },
-                    new Pet { ShelterId = 1, Name = "Adek", Age = 4, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)0, Description = "Owczarek niemiecki, brazowy", Size = (Size?)2, Difficulty = (Difficulty?)2 },
-                    new Pet { ShelterId = 1, Name = "Zosia", Age = 2, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)1, Description = "Minecoon, jasny wlos", Size = (Size?)1, Difficulty = (Difficulty?)2 },
-                    new Pet { ShelterId = 1, Name = "Edek", Age = 3, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)1, Description = "Kot Syberyjski, jasny", Size = 0, Difficulty = (Difficulty?)1 },
-                    new Pet { ShelterId = 1, Name = "Enio", Age = 1, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)2, Description = "Chomik, szary", Size = 0, Difficulty = 0 }
+                    new Pet { ShelterId = 1, Name = "Azor", Age = 2, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)0, Description = "Owczarek niemiecki, dlugo-wlosy, opalany", Size = (Size?)2, Difficulty = (Difficulty?)2, PhotoUrl = null },
+                    new Pet { ShelterId = 2, Name = "Czesio", Age = 1, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)2, Description = "Chomik, jasna siersc, mlody", Size = (Size?)0, Difficulty = 0, PhotoUrl = null  },
+                    new Pet { ShelterId = 2, Name = "Oskar", Age = 5, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)0, Description = "York, bialy", Size = (Size?)0, Difficulty = (Difficulty?)1 , PhotoUrl = null },
+                    new Pet { ShelterId = 2, Name = "Ella", Age = 3, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)1, Description = "Kot, Rudy", Size = (Size?)1, Difficulty = 0 , PhotoUrl = null },
+                    new Pet { ShelterId = 2, Name = "Bobek", Age = 4, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)2, Description = "Maly zolwik", Size = (Size?)0, Difficulty = 0, PhotoUrl = null  },
+                    new Pet { ShelterId = 2, Name = "Aria", Age = 1, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)1, Description = "Kot perski, zloty", Size = (Size?)0, Difficulty = (Difficulty?)2 , PhotoUrl = null },
+                    new Pet { ShelterId = 2, Name = "Kiel", Age = 8, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)0, Description = "Golden red river, ciemny wlos", Size = (Size?)2, Difficulty = (Difficulty?)1, PhotoUrl = null  },
+                    new Pet { ShelterId = 2, Name = "Cymek", Age = 6, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)1, Description = "Kot, czarna karnacja", Size = 0, Difficulty = (Difficulty?)1, PhotoUrl = null  },
+                    new Pet { ShelterId = 1, Name = "Mati", Age = 3, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)0, Description = "Jamnik, ciemna siersc", Size = 0, Difficulty = (Difficulty?)1, PhotoUrl = null  },
+                    new Pet { ShelterId = 1, Name = "Alex", Age = 1, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)2, Description = "Chomik, brazowy", Size = 0, Difficulty = 0, PhotoUrl = null  },
+                    new Pet { ShelterId = 1, Name = "Oli", Age = 0, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)2, Description = "Mysz domowa, szara", Size = 0, Difficulty = 0 , PhotoUrl = null },
+                    new Pet { ShelterId = 1, Name = "Benia", Age = 1, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)2, Description = "Wiewiorka czarna", Size = 0, Difficulty = (Difficulty?)2 , PhotoUrl = null },
+                    new Pet { ShelterId = 1, Name = "Adek", Age = 4, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)0, Description = "Owczarek niemiecki, brazowy", Size = (Size?)2, Difficulty = (Difficulty?)2, PhotoUrl = null  },
+                    new Pet { ShelterId = 1, Name = "Zosia", Age = 2, Sex = (Sex?)0, Origins = 0, BreedType = (BreedType?)1, Description = "Minecoon, jasny wlos", Size = (Size?)1, Difficulty = (Difficulty?)2 , PhotoUrl = null },
+                    new Pet { ShelterId = 1, Name = "Edek", Age = 3, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)1, Description = "Kot Syberyjski, jasny", Size = 0, Difficulty = (Difficulty?)1, PhotoUrl = null  },
+                    new Pet { ShelterId = 1, Name = "Enio", Age = 1, Sex = (Sex?)1, Origins = 0, BreedType = (BreedType?)2, Description = "Chomik, szary", Size = 0, Difficulty = 0, PhotoUrl = null  }
             };
 
             foreach (Pet p in pets)

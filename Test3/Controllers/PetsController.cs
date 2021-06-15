@@ -85,13 +85,14 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PetId,Name,Age,Sex,Origins,Type,Description,Size,Difficulty,PhotoUrl,ShelterId")] Pet pet)
+        public async Task<IActionResult> Create([Bind("PetId,Name,Age,Sex,Origins,Type,Description,Size,Difficulty,PhotoUrl")] Pet pet)
         {
             var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
             if (currentUser.ShelterId != null)
             {
                 if (ModelState.IsValid)
                 {
+                    pet.ShelterId = (int)currentUser.ShelterId;
                     _context.Add(pet);
                     await _context.SaveChangesAsync();
 
@@ -100,7 +101,6 @@ namespace Petfinder.Controllers
 
                     return RedirectToAction(nameof(Index));
                 }
-                ViewData["ShelterId"] = new SelectList(_context.Shelters, "ShelterId", "ShelterId", pet.ShelterId);
                 return View(pet);
             }
             else
@@ -128,8 +128,6 @@ namespace Petfinder.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", pet.ShelterId);
             return View(pet);
         }
 
@@ -166,7 +164,6 @@ namespace Petfinder.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", pet.ShelterId);
             return View(pet);
         }
 
