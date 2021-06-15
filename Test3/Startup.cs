@@ -55,13 +55,13 @@ namespace Petfinder
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
-            services.AddAuthorization(options =>
-            {
-                // TBA: Which sites require auth
-                options.FallbackPolicy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    // TBA: Which sites require auth
+            //    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+            //        .RequireAuthenticatedUser()
+            //        .Build();
+            //});
 
             services.AddHttpContextAccessor();
         }

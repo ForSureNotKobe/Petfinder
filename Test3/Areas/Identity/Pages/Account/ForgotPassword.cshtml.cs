@@ -21,7 +21,7 @@ namespace Petfinder.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<User> userManager, EmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

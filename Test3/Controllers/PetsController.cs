@@ -85,7 +85,7 @@ namespace Petfinder.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PetId,Name,Age,Sex,Origins,Type,Description,Size,Difficulty,PhotoUrl")] Pet pet)
+        public async Task<IActionResult> Create([Bind("PetId,Name,Age,Sex,Origins,BreedType,Description,Size,Difficulty,PhotoUrl")] Pet pet)
         {
             var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
             if (currentUser.ShelterId != null)
@@ -137,8 +137,10 @@ namespace Petfinder.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PetId,Name,Age,Sex,Origins,Type,Description,Size,Difficulty,PhotoUrl,ShelterId")] Pet pet)
+        public async Task<IActionResult> Edit(int id, [Bind("PetId,Name,Age,Sex,Origins,BreedType,Description,Size,Difficulty,PhotoUrl")] Pet pet)
         {
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
+
             if (id != pet.PetId)
             {
                 return NotFound();
@@ -148,6 +150,7 @@ namespace Petfinder.Controllers
             {
                 try
                 {
+                    pet.ShelterId = (int)currentUser.ShelterId;
                     _context.Update(pet);
                     await _context.SaveChangesAsync();
                 }
