@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Linq;
-using Petfinder.Models;
 using Petfinder.Data;
+using Petfinder.Models;
+using System;
 
 namespace Petfinder
 {

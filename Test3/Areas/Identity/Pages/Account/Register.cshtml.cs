@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -14,6 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Petfinder.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace Petfinder.Areas.Identity.Pages.Account
 {
@@ -47,7 +46,7 @@ namespace Petfinder.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress (ErrorMessage = "Invalid e-mail adress")]
+            [EmailAddress(ErrorMessage = "Invalid e-mail adress")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -95,7 +94,7 @@ namespace Petfinder.Areas.Identity.Pages.Account
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         //return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                        return RedirectToPage("ConfirmEmail", new { userId = user.Id , code});
+                        return RedirectToPage("ConfirmEmail", new { userId = user.Id, code });
                     }
                     else
                     {

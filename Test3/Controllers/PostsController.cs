@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Petfinder.Helpers;
 using Petfinder.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Petfinder.Controllers
 {
@@ -91,7 +91,7 @@ namespace Petfinder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PostId,Type,Title,Description,PhotoUrl")] Post post)
         {
-            var currentUser = UserHelper.GetCurrentUser(HttpContext,_context);
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
 
             post.User = currentUser;
             post.UserId = currentUser.Id;

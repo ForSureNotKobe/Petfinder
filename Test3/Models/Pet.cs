@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Petfinder.Models
-{    
+{
     public enum Size
     {
         small, average, big
@@ -36,15 +33,15 @@ namespace Petfinder.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        [Range(0,99,ErrorMessage ="Invalid age")]
+        [Range(0, 99, ErrorMessage = "Invalid age")]
         public int Age { get; set; }
         [Required]
         public Sex? Sex { get; set; }
         [Required]
-        public Origins? Origins { get; set; }        
+        public Origins? Origins { get; set; }
         public BreedType? BreedType { get; set; }
         [Required]
-        [StringLength(500,ErrorMessage = "Description must be below 32 characters long")]
+        [StringLength(500, ErrorMessage = "Description must be below 32 characters long")]
         public string Description { get; set; }
         public Size? Size { get; set; }
         public Difficulty? Difficulty { get; set; }

@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Petfinder.Models;
 
 namespace Petfinder.Models
 {
@@ -23,7 +18,7 @@ namespace Petfinder.Models
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Shelter)
-                .WithOne(s => s.User);            
+                .WithOne(s => s.User);
 
             modelBuilder.Entity<Pet>()
                 .HasOne(p => p.Shelter)
@@ -38,7 +33,7 @@ namespace Petfinder.Models
                 .WithMany(u => u.Ratings);
 
             modelBuilder.Entity<Rating>()
-                .HasOne(r => r.Clinic);                
+                .HasOne(r => r.Clinic);
 
             modelBuilder.Entity<User>()
                 .HasOne(c => c.Clinic);

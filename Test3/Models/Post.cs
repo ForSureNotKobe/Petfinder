@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Petfinder.Models
 {
@@ -12,7 +8,7 @@ namespace Petfinder.Models
     }
 
     public class Post
-    {        
+    {
         public int PostId { get; set; }
         [Required]
         public Type? Type { get; set; }
@@ -22,7 +18,7 @@ namespace Petfinder.Models
         [Required]
         [StringLength(32, ErrorMessage = "Description must be below 32 characters long")]
         public string Description { get; set; }
-        [Url(ErrorMessage ="Invalid URL")]
+        [Url(ErrorMessage = "Invalid URL")]
         public string PhotoUrl { get; set; }
 
         public string UserId { get; set; }

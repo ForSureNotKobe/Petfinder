@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Petfinder.Helpers;
 using Petfinder.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Petfinder.Controllers
 {
@@ -47,7 +42,7 @@ namespace Petfinder.Controllers
             };
 
 
-            clinicRatingModel.Clinic = clinicRatingModel.Clinics                
+            clinicRatingModel.Clinic = clinicRatingModel.Clinics
                 .FirstOrDefault(m => m.ClinicId == id);
             clinicRatingModel.Ratings = clinicRatingModel.Ratings.Where(m => m.ClinicId == id);
             return View(clinicRatingModel);
@@ -57,12 +52,12 @@ namespace Petfinder.Controllers
         // GET: Clinics/Create
         public IActionResult Create()
         {
-            var currentUser = UserHelper.GetCurrentUser(HttpContext,_context);
+            var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
 
             if (currentUser.ClinicId != null)
             {
-                return(RedirectToAction("Index"));
-            }            
+                return (RedirectToAction("Index"));
+            }
 
             return View();
         }
@@ -187,7 +182,7 @@ namespace Petfinder.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
-        { 
+        {
             var clinic = await _context.Clinics.FindAsync(id);
 
             var currentUser = UserHelper.GetCurrentUser(HttpContext, _context);
@@ -205,6 +200,6 @@ namespace Petfinder.Controllers
         {
             return _context.Clinics.Any(e => e.ClinicId == id);
         }
-       
+
     }
 }

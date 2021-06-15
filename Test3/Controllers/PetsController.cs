@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Dynamic;
-using Petfinder.Models;
 using Petfinder.Helpers;
-using Microsoft.AspNetCore.Hosting;
+using Petfinder.Models;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Petfinder.Controllers
 {
@@ -235,7 +234,7 @@ namespace Petfinder.Controllers
             string orderFilter = formCollection["SortParams"];
             int shelterFilter = Convert.ToInt32(formCollection["Shelter"]);
 
-            
+
 
             petViewModel.Pets = petViewModel.Pets
                 .Where(p =>

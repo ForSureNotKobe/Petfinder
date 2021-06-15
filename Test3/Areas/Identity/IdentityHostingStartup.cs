@@ -1,12 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Petfinder.Data;
-using Petfinder.Models;
+﻿using Microsoft.AspNetCore.Hosting;
 
 [assembly: HostingStartup(typeof(Petfinder.Areas.Identity.IdentityHostingStartup))]
 namespace Petfinder.Areas.Identity
@@ -15,7 +7,8 @@ namespace Petfinder.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
                 //services.AddDbContext<PetfinderContext>(options =>
                 //    options.UseSqlServer(
                 //        context.Configuration.GetConnectionString("PetfinderContextConnection")));

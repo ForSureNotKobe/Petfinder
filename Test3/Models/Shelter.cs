@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Petfinder.Models
 {
@@ -14,7 +11,7 @@ namespace Petfinder.Models
         public string Name { get; set; }
 
         [Required]
-        [EmailAddress(ErrorMessage = "Invalid e-mail adress")] 
+        [EmailAddress(ErrorMessage = "Invalid e-mail adress")]
         public string Email { get; set; }
         [Required]
         [Phone(ErrorMessage = "Invalid phone number")]

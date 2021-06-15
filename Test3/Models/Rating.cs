@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Petfinder.Models
 {
@@ -17,7 +13,7 @@ namespace Petfinder.Models
         [StringLength(200, ErrorMessage = "Description must be below 32 characters long")]
         public string Content { get; set; }
         [Required]
-        public Opinion? Opinion { get; set; }        
+        public Opinion? Opinion { get; set; }
         public Clinic Clinic { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }

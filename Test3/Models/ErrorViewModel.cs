@@ -1,5 +1,3 @@
-using System;
-
 namespace Petfinder.Models
 {
     public class ErrorViewModel

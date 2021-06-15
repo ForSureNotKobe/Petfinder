@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Petfinder.Models;
+using System.Diagnostics;
 
 namespace Petfinder.Controllers
 {
@@ -21,12 +17,12 @@ namespace Petfinder.Controllers
             _logger = logger;
             _context = context;
         }
-        
+
         public IActionResult Index()
         {
             ViewBag.Pets = _context.Pets;
             ViewBag.Posts = _context.Posts;
-           
+
             return View();
         }
 
