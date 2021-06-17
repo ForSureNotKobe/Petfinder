@@ -29,30 +29,30 @@
                             </button>
                         </form>
                     </div>
-                    <a class="lg-nav-link" href="/Posts">
+                    <a class="py-2 p-2 rounded-lg text-white font-bold" href="/Posts">
                         Lost & Found
                     </a>
-                    <a class="lg-nav-link" href="/Shelters">
+                    <a class="py-2 p-2 rounded-lg text-white font-bold" href="/Shelters">
                         Shelters
                     </a>
-                    <a class="lg-nav-link" href="/Clinics">
+                    <a class="py-2 p-2 rounded-lg text-white font-bold" href="/Clinics">
                         Vets
                     </a>
-                    <a class="lg-nav-link" href="/Pets">
+                    <a class="py-2 p-2 rounded-lg text-white font-bold" href="/Pets">
                         Pets
                     </a>
                     @{if (!Context.User.Identity.IsAuthenticated)
                         {
-                            <a class="lg-nav-link" href="/identity/account/login">
+                            <a class="py-2 p-2 rounded-lg text-white font-bold" href="/identity/account/login">
                                 Log in
                             </a>
-                            <a class="lg-nav-link" href="/identity/account/register">
+                            <a class="py-2 p-2 rounded-lg text-white font-bold" href="/identity/account/register">
                                 Sign Up
                             </a>
                         }
                         else
                         {
-                            <a class="lg-nav-link" href="/identity/account/logout">
+                            <a class="py-2 p-2 rounded-lg text-white font-bold" href="/identity/account/logout">
                                 Log out
                             </a>
                         }

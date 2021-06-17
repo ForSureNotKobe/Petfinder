@@ -10,8 +10,8 @@
 </head>
 <body>
     <div class="lightbox-img-big-tile">
-        <a class="lightbox-img" data-lightbox="example-1" href="@Html.DisplayFor(model => model.PhotoUrl)">
-            <img class="lightbox-img" src="@Html.DisplayFor(model => model.PhotoUrl)" />
+        <a class="lightbox-img" data-lightbox="example-1">
+            <img class="lightbox-img" src="https://fourwaysreview.co.za/wp-content/uploads/sites/23/2018/06/1_43102.jpg)" />
         </a>
     </div>
     <div class="big-tiles-flex">
@@ -35,8 +35,7 @@
             </div>
         </div>
     </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.PostId">Edit</a> |
+    <div>        
         <div>
             <a class="bg-gray-900 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full" asp-action="Index">Back to List</a>
         </div>
