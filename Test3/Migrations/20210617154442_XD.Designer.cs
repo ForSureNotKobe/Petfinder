@@ -10,8 +10,8 @@ using Petfinder.Models;
 namespace Petfinder.Migrations
 {
     [DbContext(typeof(PetfinderContext))]
-    [Migration("20210614212822_Basefixv2")]
-    partial class Basefixv2
+    [Migration("20210617154442_XD")]
+    partial class XD
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,8 +209,8 @@ namespace Petfinder.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int?>("Difficulty")
                         .HasColumnType("int");
@@ -285,10 +285,11 @@ namespace Petfinder.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("Opinion")
-                        .HasMaxLength(20)
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")

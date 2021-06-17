@@ -10,47 +10,32 @@
 </head>
 <body>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nip)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nip)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ShelterId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+    <div class="container mx-auto px-4 h-full">
+        <div class="flex content-center items-center justify-center h-full">
+            <div class="w-full lg:w-4/12 px-4">
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+                    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                        <section>
+                            <form asp-action="Delete">
+                                <div class="text-left mb-3">
+                                    <h6 class="text-blueGray-500 font-bold">Are you sure that you want to delete your shelter?</h6>
+                                </div>
+                                <input type="hidden" asp-for="ShelterId" />
+                                <div class="relative w-full mb-3">
+                                    <div style="float:left;">
+                                        <input type="submit" class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ml-3 mr-1 mb-5" value="back to list" asp-action="Index" />
+                                    </div>
+                                    <div style="float:right">
+                                        <input type="submit" value="Delete" class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ml-3 mr-1 mb-5" />
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
