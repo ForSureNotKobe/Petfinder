@@ -32,7 +32,7 @@
                 <div class="border-bar"></div>
                 <div class="shelter-tile-flex">
                     <p class="text-xl text-gray-600 px-1">Nip:</p>
-                    <p class="text-xl text-gray-600 px-1">123</p>
+                    <p class="text-xl text-gray-600 px-1">@Html.DisplayFor(model => model.Clinic.Nip)</p>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
 
                                 @foreach (var rating in Model.Ratings)
                                 {
-                                    <div onclick="location.href='/Ratings/Details/@rating.RatingId';" class="tile-background">
+                                    <div class="tile-background">
                                         <div>
                                             <p style="background-color: #e6e6e6" class="m-auto text-gray-600 text-2xl text-center">@rating.Opinion</p>
                                         </div>
