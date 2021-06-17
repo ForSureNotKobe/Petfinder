@@ -56,7 +56,7 @@ namespace Petfinder.Controllers
 
             if (currentUser.ClinicId != null)
             {
-                return RedirectToAction("Create", "Clinics");
+                return RedirectToAction("Index", "Clinics");
             }
 
             return View();
@@ -79,12 +79,13 @@ namespace Petfinder.Controllers
                 _context.Add(clinic);
                 await _context.SaveChangesAsync();
 
+                currentUser.Clinic = clinic;
                 currentUser.ClinicId = clinic.ClinicId;
                 _context.Update(currentUser);
 
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            currentUser.ClinicId = clinic.ClinicId;
 
             return View(clinic);
         }
@@ -126,7 +127,7 @@ namespace Petfinder.Controllers
                 return NotFound();
             }
 
-            if (clinic.UserId != currentUser.Id)
+            if (currentUser.ClinicId != clinic.ClinicId)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -135,7 +136,9 @@ namespace Petfinder.Controllers
             {
                 try
                 {
+                    clinic.UserId = currentUser.Id;
                     _context.Update(clinic);
+                    currentUser.Clinic = clinic;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -190,6 +193,11 @@ namespace Petfinder.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
+
+            currentUser.ClinicId = null;
+            currentUser.Clinic = null;
+
+            _context.Update(currentUser);
 
             _context.Clinics.Remove(clinic);
             await _context.SaveChangesAsync();
